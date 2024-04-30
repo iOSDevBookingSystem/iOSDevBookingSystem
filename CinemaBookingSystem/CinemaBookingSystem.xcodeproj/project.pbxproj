@@ -32,6 +32,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		65C741072BE10B15004C92B1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B524762A2BDF679C0045B89F /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		65C741082BE10B1C004C92B1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		B524761C2BDF679C0045B89F = {
 			isa = PBXGroup;
 			children = (
@@ -51,8 +66,9 @@
 		B52476272BDF679C0045B89F /* CinemaBookingSystem */ = {
 			isa = PBXGroup;
 			children = (
+				65C741082BE10B1C004C92B1 /* Models */,
+				65C741072BE10B15004C92B1 /* Views */,
 				B52476282BDF679C0045B89F /* CinemaBookingSystemApp.swift */,
-				B524762A2BDF679C0045B89F /* ContentView.swift */,
 				B524762C2BDF679E0045B89F /* Assets.xcassets */,
 				B524762E2BDF679E0045B89F /* Preview Content */,
 			);
