@@ -53,7 +53,6 @@ struct RegistrationView: View {
             }
 
             Button("Register") {
-                viewModel.register()
             }
         }
     }

@@ -21,17 +21,19 @@ class AuthViewModel: ObservableObject {
     init() {
         userAccount = User(name: "Peter Parker", email: "peter@spiderman.com", password: "spiderman", phoneNumber: "02 1234 5678", gender: "Male", selectedGenres: Set(["Comedy"]), selectedCinemas:Set(["Cinema 1"]))
     }
-
-    func login() {
+    
+    func login(completion: (Bool) -> Void, onFailure: () -> Void) {
         self.isLoggingIn = true
         
         // Simulate a login request to a backend
         if self.email == self.userAccount.email && self.password == self.userAccount.password {
             self.isAuthenticated = true
             self.loginError = ""
+            completion(true)
         } else {
             self.isAuthenticated = false
             self.loginError = "Incorrect email or password. Please try again."
+            onFailure()
         }
         
         self.isLoggingIn = false

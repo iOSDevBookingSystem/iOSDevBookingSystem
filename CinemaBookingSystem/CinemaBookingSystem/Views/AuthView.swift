@@ -40,11 +40,11 @@ struct AuthView: View {
                     .padding()
                 
                 Button(action: {
-                    viewModel.login { success in
-                        if success {
-                            shouldNavigate = true
-                            print("Logged in successfully")
-                        }
+                    viewModel.login { _ in
+                        shouldNavigate = true
+                        print("Logged in successfully")
+                    } onFailure: {
+                        print("Log in failed")
                     }
                 }) {
                     Text("Login")
