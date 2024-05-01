@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @ObservedObject var mainViewModel: MainViewModel
+    @State var userAccount: User
     
     var body: some View {
-        Text("Hello \(mainViewModel.userAccount.name)")
+        Text("Hello \(userAccount.name)")
     }
 }
 

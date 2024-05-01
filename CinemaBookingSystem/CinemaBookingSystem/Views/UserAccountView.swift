@@ -8,23 +8,23 @@
 import SwiftUI
 
 struct UserAccountView: View {
-    @ObservedObject var mainViewModel: MainViewModel
+    @State var userAccount: User
     
     private var genres = GenreList.allGenres()
     private var cinemas = CinemaList.allCinemas()
     
-    init(mainViewModel: MainViewModel) {
-        self.mainViewModel = mainViewModel
+    init(userAccount: User) {
+        self.userAccount = userAccount
     }
 
     var body: some View {
         Form {
             Section(header: Text("Your Details")) {
-                TextField("Name", text: $mainViewModel.userAccount.name)
-                TextField("Email", text: $mainViewModel.userAccount.email)
-                TextField("Phone Number", text: $mainViewModel.userAccount.phoneNumber)
+                TextField("Name", text: $userAccount.name)
+                TextField("Email", text: $userAccount.email)
+                TextField("Phone Number", text: $userAccount.phoneNumber)
                     .keyboardType(.phonePad)
-                Picker("Gender", selection: $mainViewModel.userAccount.gender) {
+                Picker("Gender", selection: $userAccount.gender) {
                     Text("Male").tag("Male")
                     Text("Female").tag("Female")
                 }
@@ -34,11 +34,11 @@ struct UserAccountView: View {
 
             Section(header: Text("Favorite Genres")) {
                 ForEach(genres, id: \.self) { genre in
-                    MultipleSelectionRow(title: genre, isSelected: mainViewModel.userAccount.selectedGenres.contains(genre)) {
-                        if mainViewModel.userAccount.selectedGenres.contains(genre) {
-                            mainViewModel.userAccount.selectedGenres.remove(genre)
+                    MultipleSelectionRow(title: genre, isSelected: userAccount.selectedGenres.contains(genre)) {
+                        if userAccount.selectedGenres.contains(genre) {
+                            userAccount.selectedGenres.remove(genre)
                         } else {
-                            mainViewModel.userAccount.selectedGenres.insert(genre)
+                            userAccount.selectedGenres.insert(genre)
                         }
                     }
                 }
@@ -46,11 +46,11 @@ struct UserAccountView: View {
             
             Section(header: Text("Favorite Cinemas")) {
                 ForEach(cinemas, id: \.self) { cinema in
-                    MultipleSelectionRow(title: cinema, isSelected: mainViewModel.userAccount.selectedCinemas.contains(cinema)) {
-                        if mainViewModel.userAccount.selectedCinemas.contains(cinema) {
-                            mainViewModel.userAccount.selectedCinemas.remove(cinema)
+                    MultipleSelectionRow(title: cinema, isSelected: userAccount.selectedCinemas.contains(cinema)) {
+                        if userAccount.selectedCinemas.contains(cinema) {
+                            userAccount.selectedCinemas.remove(cinema)
                         } else {
-                            mainViewModel.userAccount.selectedCinemas.insert(cinema)
+                            userAccount.selectedCinemas.insert(cinema)
                         }
                     }
                 }

@@ -9,15 +9,11 @@
 /* Begin PBXBuildFile section */
 		6523F17A2BE2464400538065 /* GenreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6523F1792BE2464400538065 /* GenreModel.swift */; };
 		6523F17C2BE2486900538065 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6523F17B2BE2486900538065 /* OrderModel.swift */; };
-		6523F17F2BE24BF400538065 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6523F17E2BE24BF400538065 /* MainViewModel.swift */; };
 		65C7410A2BE10C74004C92B1 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C741092BE10C74004C92B1 /* AuthViewModel.swift */; };
 		65C7410C2BE10CA6004C92B1 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7410B2BE10CA6004C92B1 /* AuthView.swift */; };
-		65C7410E2BE10CE5004C92B1 /* UserAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7410D2BE10CE5004C92B1 /* UserAccountViewModel.swift */; };
 		65C741102BE10CFA004C92B1 /* UserAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7410F2BE10CFA004C92B1 /* UserAccountView.swift */; };
 		65C741142BE10D45004C92B1 /* OrderHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C741132BE10D45004C92B1 /* OrderHistoryView.swift */; };
-		65C741162BE10E09004C92B1 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C741152BE10E08004C92B1 /* RegistrationViewModel.swift */; };
 		65C741182BE10E12004C92B1 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C741172BE10E12004C92B1 /* RegistrationView.swift */; };
-		65C7411A2BE10FB2004C92B1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C741192BE10FB2004C92B1 /* MainView.swift */; };
 		65C7411C2BE11948004C92B1 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7411B2BE11948004C92B1 /* UserModel.swift */; };
 		65C7411E2BE11D39004C92B1 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7411D2BE11D39004C92B1 /* AccountView.swift */; };
 		65C741202BE11E09004C92B1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7411F2BE11E09004C92B1 /* SettingsView.swift */; };
@@ -38,15 +34,11 @@
 /* Begin PBXFileReference section */
 		6523F1792BE2464400538065 /* GenreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreModel.swift; sourceTree = "<group>"; };
 		6523F17B2BE2486900538065 /* OrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
-		6523F17E2BE24BF400538065 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		65C741092BE10C74004C92B1 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		65C7410B2BE10CA6004C92B1 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
-		65C7410D2BE10CE5004C92B1 /* UserAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountViewModel.swift; sourceTree = "<group>"; };
 		65C7410F2BE10CFA004C92B1 /* UserAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountView.swift; sourceTree = "<group>"; };
 		65C741132BE10D45004C92B1 /* OrderHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryView.swift; sourceTree = "<group>"; };
-		65C741152BE10E08004C92B1 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		65C741172BE10E12004C92B1 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
-		65C741192BE10FB2004C92B1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		65C7411B2BE11948004C92B1 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		65C7411D2BE11D39004C92B1 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		65C7411F2BE11E09004C92B1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -80,13 +72,10 @@
 			isa = PBXGroup;
 			children = (
 				65C741092BE10C74004C92B1 /* AuthViewModel.swift */,
-				65C7410D2BE10CE5004C92B1 /* UserAccountViewModel.swift */,
-				65C741152BE10E08004C92B1 /* RegistrationViewModel.swift */,
 				65C741212BE12169004C92B1 /* SeatSelectionViewModel.swift */,
 				65C7412B2BE1319A004C92B1 /* CinemasViewModel.swift */,
 				65C7412D2BE1323E004C92B1 /* MoviesViewModel.swift */,
 				65C7412F2BE133CA004C92B1 /* SchedulesViewModel.swift */,
-				6523F17E2BE24BF400538065 /* MainViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -99,7 +88,6 @@
 				65C7410F2BE10CFA004C92B1 /* UserAccountView.swift */,
 				65C741132BE10D45004C92B1 /* OrderHistoryView.swift */,
 				65C741172BE10E12004C92B1 /* RegistrationView.swift */,
-				65C741192BE10FB2004C92B1 /* MainView.swift */,
 				65C7411D2BE11D39004C92B1 /* AccountView.swift */,
 				65C7411F2BE11E09004C92B1 /* SettingsView.swift */,
 				65C741232BE12191004C92B1 /* SeatSelectionView.swift */,
@@ -228,11 +216,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				65C741242BE12191004C92B1 /* SeatSelectionView.swift in Sources */,
-				65C7410E2BE10CE5004C92B1 /* UserAccountViewModel.swift in Sources */,
-				65C741162BE10E09004C92B1 /* RegistrationViewModel.swift in Sources */,
 				65C7411E2BE11D39004C92B1 /* AccountView.swift in Sources */,
 				65C7412E2BE1323E004C92B1 /* MoviesViewModel.swift in Sources */,
-				6523F17F2BE24BF400538065 /* MainViewModel.swift in Sources */,
 				65C741302BE133CA004C92B1 /* SchedulesViewModel.swift in Sources */,
 				65C741142BE10D45004C92B1 /* OrderHistoryView.swift in Sources */,
 				B524762B2BDF679C0045B89F /* ContentView.swift in Sources */,
@@ -240,7 +225,6 @@
 				65C7412A2BE12AEC004C92B1 /* MovieModel.swift in Sources */,
 				65C741202BE11E09004C92B1 /* SettingsView.swift in Sources */,
 				65C741102BE10CFA004C92B1 /* UserAccountView.swift in Sources */,
-				65C7411A2BE10FB2004C92B1 /* MainView.swift in Sources */,
 				6523F17A2BE2464400538065 /* GenreModel.swift in Sources */,
 				65C741222BE12169004C92B1 /* SeatSelectionViewModel.swift in Sources */,
 				6523F17C2BE2486900538065 /* OrderModel.swift in Sources */,
