@@ -3,6 +3,7 @@
 //  CinemaBookingSystem
 //
 //  Created by Daniel Angeloni on 30/4/2024.
+//  Changed by Tong Qian on 5/5/2024.
 //
 
 import SwiftUI
@@ -18,6 +19,10 @@ struct AccountView: View {
 
                     NavigationLink(destination: OrderHistoryView(mainViewModel: mainViewModel)) {
                         Text("My Orders")
+                    }
+                    
+                    NavigationLink(destination: GiftcardView(mainViewModel: mainViewModel)) {
+                        Text("My Giftcard")
                     }
 
                     NavigationLink(destination: UserAccountView(mainViewModel: mainViewModel)) {
