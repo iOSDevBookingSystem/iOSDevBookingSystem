@@ -15,7 +15,7 @@ struct Order: Identifiable, Hashable {
 }
 
 // Base protocol for things that can be in an order
-protocol PurchasableItems: Hashable {
+protocol PurchasableItems: Hashable, Identifiable {
     var id: UUID { get }
     var name: String { get }
     var unit_price: Double { get }
