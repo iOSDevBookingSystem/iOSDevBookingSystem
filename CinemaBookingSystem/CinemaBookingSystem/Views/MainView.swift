@@ -12,12 +12,12 @@ struct MainView: View {
     
     var body: some View {
         TabView {
-            OrderHistoryView(mainViewModel: viewModel)
+            MoviesView()
                 .tabItem {
                     Label("Movies", systemImage: "movieclapper.fill")
                 }
             
-            OrderHistoryView(mainViewModel: viewModel)
+            CinemasView()
                 .tabItem {
                     Label("Cinemas", systemImage: "tv.fill")
                 }

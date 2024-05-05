@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Cinema: Codable, Hashable {
+struct Cinema: Codable, Hashable, Identifiable {
     var id: Int
     var name: String
     var address: String

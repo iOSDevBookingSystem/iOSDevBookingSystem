@@ -8,10 +8,11 @@
 import Foundation
 
 class MoviesViewModel: ObservableObject {
-    private var movies: [Movie] = []
+    @Published var movies: [Movie] = []
     
     init() {
-        self.addMovie(movie: Movie(id: 0, name: "Spider-Man", genre: "Comedy", description: "Movie about spiders"))
+        //self.addMovie(movie: Movie(id: 0, name: "Spider-Man", genre: "Comedy", description: "Movie about spiders", imageName: "spider-man"))
+        movies.append(Movie(id: 0, name: "Spider-Man", genre: "Comedy", description: "Movie about spiders", imageName: "spiderman"))
     }
 
     func addMovie(movie: Movie) {

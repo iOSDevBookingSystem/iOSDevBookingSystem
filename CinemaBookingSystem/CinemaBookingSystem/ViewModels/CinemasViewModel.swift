@@ -8,10 +8,11 @@
 import Foundation
 
 class CinemasViewModel: ObservableObject {
-    private var cinemas: [Cinema] = []
+    @Published var cinemas: [Cinema] = []
     
     init() {
-        self.addCinema(cinema: Cinema(id: 1, name: "Sydney City", address: "George St", rooms: [Room(id: 1, layout: Layout(leftSeats: 2, middleSeats: 5, rightSeats: 2, rowCount: 10))]))
+        //self.addCinema(cinema: Cinema(id: 1, name: "Sydney City", address: "George St", rooms: [Room(id: 1, layout: Layout(leftSeats: 2, middleSeats: 5, rightSeats: 2, rowCount: 10))]))
+        cinemas.append(Cinema(id: 1, name: "Sydney City", address: "George St", rooms: [Room(id: 1, layout: Layout(leftSeats: 2, middleSeats: 5, rightSeats: 2, rowCount: 10))]))
     }
     
     func addCinema(cinema: Cinema) {
