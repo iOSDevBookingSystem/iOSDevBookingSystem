@@ -9,8 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var authViewModel: AuthViewModel = AuthViewModel()
-    
+    @ObservedObject var schedViewModel: SchedulesViewModel = SchedulesViewModel()
     var body: some View {
+        AuthView(viewModel: authViewModel, schedViewModel: schedViewModel)
         if authViewModel.isAuthenticated {
             if let user = authViewModel.userAccount {
                 TabView {

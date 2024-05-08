@@ -8,7 +8,24 @@
 import Foundation
 
 class SchedulesViewModel: ObservableObject {
-    private var schedules: [Session] = []
+    @Published var schedules: [Session] = []
+    @Published var movies: Movies = Movies()
+    @Published var cinemas: Cinemas = Cinemas()
+//    @Published var movies: MoviesViewModel = MoviesViewModel()
+//    @Published var cinemas: CinemasViewModel = CinemasViewModel()
+    
+    init(){
+        //addSession(session: Session(id: 1 , cinema: cinemas.getCinema(id: 1)!, movie: movies.getMovie(id: 0)!, time: "12:00"))
+        schedules.append(Session(id: 1 , cinema: cinemas.getCinema(id: 1)!, movie: movies.getMovie(id: 0)!, time: "12:00"))
+        schedules.append(Session(id: 2 , cinema: cinemas.getCinema(id: 1)!, movie: movies.getMovie(id: 0)!, time: "13:00"))
+        schedules.append(Session(id: 3 , cinema: cinemas.getCinema(id: 1)!, movie: movies.getMovie(id: 1)!, time: "14:00"))
+        schedules.append(Session(id: 4 , cinema: cinemas.getCinema(id: 2)!, movie: movies.getMovie(id: 1)!, time: "12:00"))
+        schedules.append(Session(id: 5 , cinema: cinemas.getCinema(id: 2)!, movie: movies.getMovie(id: 0)!, time: "13:00"))
+        //addSession(movie: movies.getMovie(id: 0)!, cinema: cinemas.getCinema(id: 1)!, time: "13:00")
+        //addSession(movie: movies.getMovie(id: 0)!, cinema: cinemas.getCinema(id: 1)!, time: "14:00")
+        //addSession(movie: movies.getMovie(id: 0)!, cinema: cinemas.getCinema(id: 1)!, time: "15:00")
+        //print(schedules)
+    }
     
     func addSession(movie: Movie, cinema: Cinema, time: String) {
         for session in schedules {
