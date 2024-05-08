@@ -8,25 +8,27 @@
 import SwiftUI
 
 struct CinemasView: View {
-    @StateObject var viewModel = CinemasViewModel()
+    //@StateObject var viewModel = CinemasViewModel()
+    @ObservedObject var viewModel : SchedulesViewModel
     var body: some View {
-        NavigationSplitView {
+        NavigationView {
             List{
-                ForEach(viewModel.cinemas){ cinema in
+                ForEach(viewModel.cinemas.cinemas){ cinema in
                     NavigationLink{
-                        CinemaView(cinema: cinema)
+                        CinemaView( viewModel: viewModel, cinema: cinema)
                     }label:{
                         Text(cinema.name)
                     }
                 }
             }
             .navigationTitle("Cinemas")
-        } detail:{
-            Text("Select a Cinema")
-        }
+        } 
+//    detail:{
+//            Text("Select a Cinema")
+//        }
     }
 }
 
 #Preview {
-    CinemasView()
+    CinemasView(viewModel: SchedulesViewModel())
 }

@@ -8,20 +8,18 @@
 import SwiftUI
 
 struct CinemaView: View {
-    @StateObject var viewModel = MoviesViewModel()
+    //@StateObject var viewModel = MoviesViewModel()
+    @ObservedObject var viewModel: SchedulesViewModel
     @State var cinema: Cinema
     @State var showSessions = false
     var body: some View{
         ScrollView{
-            Text(cinema.name)
-                .fontWeight(.bold)
-                .font(.title)
             Text("Movies Shown: ")
                 .font(.subheadline)
-            ForEach(viewModel.movies){ movie in
-                Button(action: {
-                    showSessions = true
-                },label: {
+            ForEach(viewModel.movies.movies){ movie in
+                NavigationLink{
+                    SessionView(viewModel: viewModel, movie: movie, cinema: cinema)
+                } label: {
                     VStack{
                         MovieView(movie: movie)
                         ZStack{
@@ -33,43 +31,38 @@ struct CinemaView: View {
                                 .foregroundStyle(.white)
                         }
                     }
-                }).sheet(isPresented: $showSessions){
-                    SessionView(movie: movie, cinema: cinema)
                 }
             }
-        }
+        }.navigationTitle(cinema.name)
     }
     
 }
 
 struct SessionView : View {
+    @ObservedObject var viewModel: SchedulesViewModel
     @State var movie: Movie
     @State var cinema: Cinema
     @State var session: String = ""
-    @State var isSelected = false
+    //@State var isSelected = false
     var body: some View {
         ScrollView{
             Text("Select session")
-            ForEach(movie.sessions, id: \.self){ time in
-                Button( action: {
-                    isSelected.toggle()
-                    session = time
-                    print(session)
-                }, label:{
-                    ZStack{
-                        Rectangle()
-                            .fill(isSelected ? .gray : .black)
-                            .cornerRadius(6.0)
-                            .frame(height: 50)
-                        Text(time)
-                            .foregroundColor(isSelected ? .black : .white)
-                    }.padding()
-                })
-            }
-            NavigationLink{
-                
-            } label: {
-                
+            ForEach(viewModel.schedules, id: \.self){ schedule in
+                if (schedule.movie.id == movie.id && schedule.cinema.id == cinema.id){
+                    NavigationLink{
+                        SeatSelectionView(viewModel: SeatSelectionViewModel(session: schedule, maxSeats: 3))
+                    } label:{
+                        ZStack{
+                            Rectangle()
+                                .fill(.black)
+                                .cornerRadius(6.0)
+                                .frame(height: 50)
+                            Text(schedule.time)
+                                .foregroundColor(.white)
+                        }.padding()
+                    }
+                }
+                    
             }
         }
     }

@@ -12,7 +12,7 @@ class MoviesViewModel: ObservableObject {
     
     init() {
         //self.addMovie(movie: Movie(id: 0, name: "Spider-Man", genre: "Comedy", description: "Movie about spiders", imageName: "spider-man"))
-        movies.append(Movie(id: 0, name: "Spider-Man", genre: "Comedy", description: "Movie about spiders", imageName: "spiderman", sessions: ["10:00", "13:00", "14:00"]))
+        movies.append(Movie(id: 0, name: "Spider-Man", genre: "Comedy", description: "Movie about spiders", imageName: "spiderman"))
     }
 
     func addMovie(movie: Movie) {

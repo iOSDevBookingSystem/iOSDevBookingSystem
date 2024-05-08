@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct MoviesView: View {
-    @StateObject var viewModel = MoviesViewModel()
+    //@StateObject var viewModel = MoviesViewModel()
+    @ObservedObject var viewModel: SchedulesViewModel
     var body: some View {
-        
         ScrollView{
             HStack{
                 Text("Movies Showing")
@@ -19,13 +19,27 @@ struct MoviesView: View {
                     .fontWeight(.bold)
                 Spacer()
             }
-            ForEach(viewModel.movies){ movie in
-                MovieView(movie: movie)
+            ForEach(viewModel.movies.movies){ movie in
+                NavigationLink{
+                    MovieDetailsView(viewModel: viewModel, movie: movie)
+                } label: {
+                    VStack{
+                        MovieView(movie: movie)
+//                        ZStack{
+//                            Rectangle()
+//                                .fill(.black)
+//                                .frame(width: 200, height: 30)
+//                                .cornerRadius(10.0)
+//                            Text("Movie Details")
+//                                .foregroundStyle(.white)
+//                        }
+                    }
+                }
             }
         }
     }
 }
 
 #Preview {
-    MoviesView()
+    MoviesView(viewModel: SchedulesViewModel())
 }

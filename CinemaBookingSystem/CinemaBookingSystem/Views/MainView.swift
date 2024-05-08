@@ -9,15 +9,15 @@ import SwiftUI
 
 struct MainView: View {
     @ObservedObject var viewModel: MainViewModel
-    
+    @ObservedObject var schedViewModel : SchedulesViewModel
     var body: some View {
         TabView {
-            MoviesView()
+            MoviesView(viewModel: schedViewModel)
                 .tabItem {
                     Label("Movies", systemImage: "movieclapper.fill")
                 }
             
-            CinemasView()
+            CinemasView(viewModel: schedViewModel)
                 .tabItem {
                     Label("Cinemas", systemImage: "tv.fill")
                 }

@@ -27,9 +27,7 @@ struct AddOnView: View {
             }
             HStack {
                 Button(action: {
-                    if (quantity <= 0){
-                        return
-                    } else{
+                    if (quantity > 0){
                         quantity -= 1
                     }},
                        label: {

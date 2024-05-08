@@ -37,7 +37,7 @@ struct AccountView: View {
             .navigationTitle("My Account")
             .listStyle(GroupedListStyle())
             .navigationDestination(isPresented: $logout) {
-                AuthView(viewModel: AuthViewModel())
+                AuthView(viewModel: AuthViewModel(), schedViewModel: SchedulesViewModel())
             }
         }
     }

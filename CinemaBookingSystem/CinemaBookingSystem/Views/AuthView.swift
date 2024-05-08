@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AuthView: View {
     @ObservedObject var viewModel: AuthViewModel
+    @ObservedObject var schedViewModel: SchedulesViewModel
     @State private var shouldNavigate = false
 
     var body: some View {
@@ -57,7 +58,7 @@ struct AuthView: View {
                 .padding(.horizontal, 20)
                 .disabled(viewModel.email.isEmpty || viewModel.password.isEmpty)
                 .navigationDestination(isPresented: $shouldNavigate) {
-                    MainView(viewModel: MainViewModel(user: viewModel.userAccount))
+                    MainView(viewModel: MainViewModel(user: viewModel.userAccount), schedViewModel: schedViewModel)
                 }
 
                 NavigationLink("Register", destination: RegistrationView())
@@ -73,5 +74,5 @@ struct AuthView: View {
 
 
 #Preview {
-    AuthView(viewModel: AuthViewModel())
+    AuthView(viewModel: AuthViewModel(), schedViewModel: SchedulesViewModel())
 }
