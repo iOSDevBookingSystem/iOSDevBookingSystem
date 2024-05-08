@@ -17,7 +17,7 @@ struct CinemasView: View {
             List{
                 ForEach(viewModel.getCinemas()){ cinema in
                     NavigationLink{
-                        CinemaView(cinema: cinema)
+                        CinemaView(cinema: cinema, userAccount: userAccount)
                     }label:{
                         Text(cinema.name)
                     }

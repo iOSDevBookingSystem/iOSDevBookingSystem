@@ -10,18 +10,22 @@ import Foundation
 class SeatSelectionViewModel: ObservableObject {
     var cinema: Cinema
     var session: Session
+    var tickets: [TicketType: Int]
     
     @Published var seats: [String: [String: Bool]] = [:]
     @Published var selectedSeats: Set<String> = []
     
+    // Layout of the cinema room
     var layout: Layout?
     
-    var maxSeats: Int  // Maximum seats user can select
+    // Maximum seats user can select
+    var maxSeats: Int
 
-    init(cinema: Cinema, session: Session, maxSeats: Int) {
+    init(cinema: Cinema, session: Session, tickets: [TicketType: Int]) {
         self.cinema = cinema
         self.session = session
-        self.maxSeats = maxSeats
+        self.tickets = tickets
+        self.maxSeats = tickets.values.reduce(0, +)
         
         // Get the layout of the room
         self.layout = cinema.getRoomLayout(roomId: session.allocatedRoom)

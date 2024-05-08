@@ -7,28 +7,22 @@
 
 import Foundation
 
-// TO-DO: add Codeable
-struct Order: Identifiable, Hashable {
+
+struct Order: Identifiable {
     var id: UUID = UUID()
     var payment_method: String
-//    var items: [any PurchasableItems]
+    var items: [any PurchasableItems]
+    var tickets: [Ticket]
+    var cinema: Cinema
+    var session: Session
 }
 
 // Base protocol for things that can be in an order
-protocol PurchasableItems: Hashable, Identifiable {
+protocol PurchasableItems: Identifiable {
     var id: UUID { get }
     var name: String { get }
     var unit_price: Double { get }
     var category: String { get }
-}
-
-// For tickets
-struct Ticket: PurchasableItems {
-    var id: UUID = UUID()
-    var name: String
-    var unit_price: Double
-    var category: String
-    var session: Session
 }
 
 // For food and drinks

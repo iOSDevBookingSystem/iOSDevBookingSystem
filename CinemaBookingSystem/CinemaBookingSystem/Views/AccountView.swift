@@ -16,9 +16,9 @@ struct AccountView: View {
         NavigationView {
             VStack {
                 List {
-                    NavigationLink(destination: OrderHistoryView(userAccount: userAccount)) {
-                        Text("My Orders")
-                    }
+//                    NavigationLink(destination: OrderHistoryView(userAccount: userAccount)) {
+//                        Text("My Orders")
+//                    }
                     
                     NavigationLink(destination: GiftCardView(userAccount: $userAccount)) {
                         Text("My Gift Cards")

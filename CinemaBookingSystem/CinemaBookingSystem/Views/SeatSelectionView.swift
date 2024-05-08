@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SeatSelectionView: View {
     @ObservedObject var viewModel: SeatSelectionViewModel
+    var userAccount: User
 
     var body: some View {
         VStack {
@@ -43,6 +44,15 @@ struct SeatSelectionView: View {
                     }
                 }
                 .padding()
+                
+                NavigationLink("Continue", destination: AddOnsView(orderViewModel: OrderViewModel(cinema: viewModel.cinema, session: viewModel.session, tickets: viewModel.tickets, userAccount: userAccount, selectedSeats: viewModel.selectedSeats), userAccount: userAccount))
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    .padding()
+                
             } else {
                 Text("No layout available")
             }

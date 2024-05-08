@@ -10,13 +10,14 @@ import SwiftUI
 struct SessionsView: View {
     @State var cinema: Cinema
     @State var movie: Movie
+    var userAccount: User
     
     var body: some View {
         NavigationView {
             List{
                 ForEach(cinema.getSessions(for: movie)){ session in
                     NavigationLink{
-                        SeatSelectionView(viewModel: SeatSelectionViewModel(cinema: cinema, session: session, maxSeats: 10))
+                        TicketSelectionView(cinema: cinema, session: session, userAccount: userAccount)
                     }label:{
                         Text(session.time)
                     }

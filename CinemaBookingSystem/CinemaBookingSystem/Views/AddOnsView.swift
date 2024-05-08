@@ -10,6 +10,14 @@ import SwiftUI
 //for order add-ons
 struct AddOnsView: View {
     @StateObject var viewModel = addOnViewModel()
+    var orderViewModel: OrderViewModel
+    var userAccount: User
+    
+    init(orderViewModel: OrderViewModel, userAccount: User) {
+        self.orderViewModel = orderViewModel
+        self.userAccount = userAccount
+    }
+    
     var body: some View {
         ScrollView{
             HStack{
@@ -23,22 +31,18 @@ struct AddOnsView: View {
                 AddOnView(consumable: consumable)
             }
             
-            NavigationLink{
-                //To-do
-            } label:{
-                ZStack{
-                    Rectangle()
-                        .fill(.black)
-                        .frame(width: 300, height: 40)
-                        .cornerRadius(15.0)
-                    Text("Add To Order")
-                        .foregroundColor(.white)
-                }
-            }
+            NavigationLink("Add To Order", destination: PaymentView(orderViewModel: orderViewModel, userAccount: userAccount))
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.black)
+                .foregroundColor(.white)
+                .cornerRadius(15.0)
+                .frame(width: 300, height: 40)
+                .padding()
         }
     }
 }
 
-#Preview {
-    AddOnsView()
-}
+//#Preview {
+//    AddOnsView(cinema: Cinema, session: T##Session, tickets: T##[TicketType : Int])
+//}
