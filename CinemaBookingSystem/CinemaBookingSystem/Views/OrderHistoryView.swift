@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct OrderHistoryView: View {
-    @ObservedObject var mainViewModel: MainViewModel
+    @State var userAccount: User
 
     var body: some View {
         List {
-            ForEach(mainViewModel.userAccount.orders, id: \.self) { order in
+            ForEach(userAccount.orders, id: \.self) { order in
                 Text("Order \(order.id)")
             }
         }

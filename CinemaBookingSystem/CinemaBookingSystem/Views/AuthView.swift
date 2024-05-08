@@ -10,6 +10,7 @@ import SwiftUI
 struct AuthView: View {
     @ObservedObject var viewModel: AuthViewModel
     @State private var shouldNavigate = false
+    @State private var showingRegistration = false
 
     var body: some View {
         NavigationStack {
@@ -40,7 +41,7 @@ struct AuthView: View {
                     .padding()
                 
                 Button(action: {
-                    viewModel.login { _ in
+                    viewModel.login {
                         shouldNavigate = true
                         print("Logged in successfully")
                     } onFailure: {
@@ -56,16 +57,21 @@ struct AuthView: View {
                 .cornerRadius(10)
                 .padding(.horizontal, 20)
                 .disabled(viewModel.email.isEmpty || viewModel.password.isEmpty)
-                .navigationDestination(isPresented: $shouldNavigate) {
-                    MainView(viewModel: MainViewModel(user: viewModel.userAccount))
-                }
 
-                NavigationLink("Register", destination: RegistrationView())
-                    .padding(.top, 20)
+                Button(action: {
+                    showingRegistration = true
+                }) {
+                    Text("Register")
+                }
+                .padding(.top, 20)
                 
                 Spacer()
             }
             .background(Color.white.edgesIgnoringSafeArea(.all))
+            
+        }
+        .fullScreenCover(isPresented: $showingRegistration) {
+            RegistrationView(authViewModel: viewModel, isPresented: $showingRegistration)
         }
     }
 }

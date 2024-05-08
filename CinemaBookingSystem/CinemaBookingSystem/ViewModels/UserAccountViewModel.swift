@@ -14,8 +14,4 @@ class UserAccountViewModel: ObservableObject {
         self.userAccount = user
     }
 
-// TO-DO: do this
-//    func updateProfile() {
-//
-//    }
 }
