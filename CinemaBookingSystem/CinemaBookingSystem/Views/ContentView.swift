@@ -9,35 +9,64 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var authViewModel: AuthViewModel = AuthViewModel()
-    @ObservedObject var schedViewModel: SchedulesViewModel = SchedulesViewModel()
+    @ObservedObject var cinemasViewModel: CinemasViewModel = CinemasViewModel()
+    @ObservedObject var moviesViewModel: MoviesViewModel = MoviesViewModel()
+    
     var body: some View {
-        AuthView(viewModel: authViewModel, schedViewModel: schedViewModel)
-        if authViewModel.isAuthenticated {
-            if let user = authViewModel.userAccount {
-                TabView {
-                    OrderHistoryView(userAccount: user)
-                        .tabItem {
-                            Label("Movies", systemImage: "movieclapper.fill")
-                        }
+        Group {
+            if authViewModel.isAuthenticated {
+                if let user = authViewModel.userAccount {
+                    TabView {
+                        MoviesView(viewModel: moviesViewModel, cinemasViewModel: cinemasViewModel, userAccount: user)
+                            .tabItem {
+                                Label("Movies", systemImage: "movieclapper.fill")
+                            }
+                        
+                        CinemasView(viewModel: cinemasViewModel, moviesViewModel: moviesViewModel, userAccount: user)
+                            .tabItem {
+                                Label("Cinemas", systemImage: "tv.fill")
+                            }
+                        
+                        AccountView(userAccount: user, isLoggedIn: $authViewModel.isAuthenticated)
+                            .tabItem {
+                                Label("Account Settings", systemImage: "gear")
+                            }
+                    }
                     
-                    OrderHistoryView(userAccount: user)
-                        .tabItem {
-                            Label("Cinemas", systemImage: "tv.fill")
-                        }
-                    
-                    AccountView(userAccount: user, isLoggedIn: $authViewModel.isAuthenticated)
-                        .tabItem {
-                            Label("Account Settings", systemImage: "gear")
-                        }
+                } else {
+                    // Handle the unexpected case where there's no user but navigation was triggered
+                    Text("No user account available.")
                 }
-                
             } else {
-                // Handle the unexpected case where there's no user but navigation was triggered
-                Text("No user account available.")
+                AuthView(viewModel: authViewModel)
             }
-        } else {
-            AuthView(viewModel: authViewModel)
         }
+            .onAppear {
+                populate()
+            }
+            
+    }
+    
+    func populate() {
+        // Add cinemas
+        let sydneyCinema = Cinema(id: 1, name: "Sydney City", address: "George St", rooms: [Room(id: 1, layout: Layout(leftSeats: 2, middleSeats: 5, rightSeats: 2, rowCount: 10))])
+        let blacktownCinema = Cinema(id: 2, name: "Blacktown", address: "Main St", rooms: [Room(id: 1, layout: Layout(leftSeats: 2, middleSeats: 5, rightSeats: 2, rowCount: 10))])
+        self.cinemasViewModel.addCinema(cinema: sydneyCinema)
+        self.cinemasViewModel.addCinema(cinema: blacktownCinema)
+        
+        // Add Movies
+        let spiderManMovie = Movie(id: 0, name: "Spider-Man", genre: "Comedy", description: "Movie about spiders", imageName: "spiderman")
+        let ironManMovie = Movie(id: 1, name: "Iron-Man", genre: "Action", description: "Movie about a man in an iron suit", imageName: "ironman")
+        self.moviesViewModel.addMovie(movie: spiderManMovie)
+        self.moviesViewModel.addMovie(movie: ironManMovie)
+        
+        // Add movie sessions
+        self.cinemasViewModel.addSessionToCinema(name: "Sydney City", movie: spiderManMovie, time: "15:00")
+        self.cinemasViewModel.addSessionToCinema(name: "Sydney City", movie: ironManMovie, time: "18:00")
+        self.cinemasViewModel.addSessionToCinema(name: "Blacktown", movie: spiderManMovie, time: "16:00")
+        self.cinemasViewModel.addSessionToCinema(name: "Blacktown", movie: ironManMovie, time: "19:00")
+
+        
     }
 }
 

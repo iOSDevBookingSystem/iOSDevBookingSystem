@@ -16,13 +16,12 @@ struct AccountView: View {
         NavigationView {
             VStack {
                 List {
-
                     NavigationLink(destination: OrderHistoryView(userAccount: userAccount)) {
                         Text("My Orders")
                     }
                     
-                    NavigationLink(destination: GiftcardView(mainViewModel: mainViewModel)) {
-                        Text("My Giftcard")
+                    NavigationLink(destination: GiftCardView(userAccount: $userAccount)) {
+                        Text("My Gift Cards")
                     }
 
                     NavigationLink(destination: UserAccountView(userAccount: $userAccount)) {
@@ -41,9 +40,6 @@ struct AccountView: View {
             }
             .navigationTitle("My Account")
             .listStyle(GroupedListStyle())
-            .navigationDestination(isPresented: $logout) {
-                AuthView(viewModel: AuthViewModel(), schedViewModel: SchedulesViewModel())
-            }
         }
     }
 }

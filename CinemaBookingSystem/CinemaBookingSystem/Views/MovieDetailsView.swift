@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct MovieDetailsView: View {
-    @ObservedObject var viewModel : SchedulesViewModel
+    @ObservedObject var cinemasViewModel : CinemasViewModel
+    @ObservedObject var moviesViewModel: MoviesViewModel
+    @State var userAccount: User
     @State var movie: Movie
+    
     var body: some View {
         ScrollView{
             //show movie details
@@ -28,7 +31,7 @@ struct MovieDetailsView: View {
             }
             //navigate to cinemas to purchase tickets
             NavigationLink{
-                CinemasView(viewModel: viewModel)
+                CinemasView(viewModel: cinemasViewModel, moviesViewModel: moviesViewModel, userAccount: userAccount)
             } label:{
                 ZStack{
                     Rectangle()

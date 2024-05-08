@@ -8,37 +8,27 @@
 import Foundation
 
 class MoviesViewModel: ObservableObject {
-    @Published var movies: [Movie] = []
-    
-    init() {
-        //self.addMovie(movie: Movie(id: 0, name: "Spider-Man", genre: "Comedy", description: "Movie about spiders", imageName: "spider-man"))
-        movies.append(Movie(id: 0, name: "Spider-Man", genre: "Comedy", description: "Movie about spiders", imageName: "spiderman"))
-    }
+    private var movies: [Movie] = []
 
     func addMovie(movie: Movie) {
-        for saved_movie in movies {
-            if saved_movie.name == movie.name {
-                break
-            }
+        if !movies.contains(where: { $0.name == movie.name }) {
             movies.append(movie)
+            print("Movie added: \(movie.name)")
+        } else {
+            print("Movie already exists: \(movie.name)")
         }
     }
 
     func getMovie(name: String) -> Movie? {
-        for saved_movie in movies {
-            if saved_movie.name == name {
-                return saved_movie
-            }
-        }
-        return nil
+        return movies.first { $0.name == name }
     }
     
     func getMovie(id: Int) -> Movie? {
-        for saved_movie in movies {
-            if saved_movie.id == id {
-                return saved_movie
-            }
-        }
-        return nil
+        return movies.first { $0.id == id }
     }
+    
+    func getMovies() -> [Movie] {
+        return movies
+    }
+    
 }

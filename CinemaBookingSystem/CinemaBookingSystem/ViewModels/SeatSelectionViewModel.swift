@@ -8,7 +8,8 @@
 import Foundation
 
 class SeatSelectionViewModel: ObservableObject {
-    @Published var session: Session
+    var cinema: Cinema
+    var session: Session
     
     @Published var seats: [String: [String: Bool]] = [:]
     @Published var selectedSeats: Set<String> = []
@@ -17,12 +18,13 @@ class SeatSelectionViewModel: ObservableObject {
     
     var maxSeats: Int  // Maximum seats user can select
 
-    init(session: Session, maxSeats: Int) {
+    init(cinema: Cinema, session: Session, maxSeats: Int) {
+        self.cinema = cinema
         self.session = session
         self.maxSeats = maxSeats
         
         // Get the layout of the room
-        self.layout = session.cinema.getRoomLayout(roomId: session.allocatedRoom)
+        self.layout = cinema.getRoomLayout(roomId: session.allocatedRoom)
         
         // Generate the seats display
         generateSeats()
@@ -67,6 +69,4 @@ class SeatSelectionViewModel: ObservableObject {
         }
     }
 }
-
-
 

@@ -8,38 +8,54 @@
 import Foundation
 
 class CinemasViewModel: ObservableObject {
-    @Published var cinemas: [Cinema] = []
-    
-    init() {
-        //self.addCinema(cinema: Cinema(id: 1, name: "Sydney City", address: "George St", rooms: [Room(id: 1, layout: Layout(leftSeats: 2, middleSeats: 5, rightSeats: 2, rowCount: 10))]))
-        cinemas.append(Cinema(id: 1, name: "Sydney City", address: "George St", rooms: [Room(id: 1, layout: Layout(leftSeats: 2, middleSeats: 5, rightSeats: 2, rowCount: 10))]))
-    }
+    private var cinemas: [Cinema] = []
     
     func addCinema(cinema: Cinema) {
-        for saved_cinema in cinemas {
-            if saved_cinema.name == cinema.name {
-                break
-            }
+        if !cinemas.contains(where: { $0.name == cinema.name }) {
             cinemas.append(cinema)
+            print("Cinema added: \(cinema.name)")
+        } else {
+            print("Cinema already exists: \(cinema.name)")
         }
     }
     
     func getCinema(name: String) -> Cinema? {
-        for saved_cinema in cinemas {
-            if saved_cinema.name == name {
-                return saved_cinema
-            }
-        }
-        return nil
+        return cinemas.first { $0.name == name }
     }
     
     func getCinema(id: Int) -> Cinema? {
-        for saved_cinema in cinemas {
-            if saved_cinema.id == id {
-                return saved_cinema
-            }
-        }
-        return nil
+        return cinemas.first { $0.id == id }
     }
-}
+    
+    func getCinemas() -> [Cinema] {
+        return self.cinemas
+    }
 
+    func addSessionToCinema(name: String, movie: Movie, time: String) {
+        guard let index = cinemas.firstIndex(where: { $0.name == name }) else {
+            print("Cinema not found")
+            return
+        }
+        cinemas[index].addSession(movie: movie, time: time)
+    }
+    
+//    func addSessionToCinema(name: String, movie: Movie, time: String) {
+//        if let index = cinemas.firstIndex(where: { $0.name == name }) {
+//            var cinema = cinemas[index]
+//            cinema.addSession(movie: movie, time: time)
+//            cinemas[index] = cinema  // Ensure the updated cinema is saved back to the array
+//        } else {
+//            print("Cinema not found")
+//        }
+//    }
+//    
+//    func addSessionToCinema(name: String, movie: Movie, time: String) {
+//        guard let index = cinemas.firstIndex(where: { $0.name == name }),
+//              let cinema = cinemas[index] else {
+//            print("Cinema not found")
+//            return
+//        }
+//        cinema.addSession(movie: movie, time: time)
+//        cinemas[index] = cinema
+//    }
+}

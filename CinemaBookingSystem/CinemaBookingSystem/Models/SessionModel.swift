@@ -7,16 +7,13 @@
 
 import Foundation
 
-struct Session: Codable, Hashable {
-    var id: Int
-    var cinema: Cinema
+struct Session: Codable, Hashable, Identifiable {
+    var id: UUID = UUID()
     var movie: Movie
     var time: String
     var allocatedRoom: Int
     
-    init(id: Int, cinema: Cinema, movie: Movie, time: String) {
-        self.id = id
-        self.cinema = cinema
+    init(movie: Movie, time: String) {
         self.movie = movie
         self.time = time
         self.allocatedRoom = 1

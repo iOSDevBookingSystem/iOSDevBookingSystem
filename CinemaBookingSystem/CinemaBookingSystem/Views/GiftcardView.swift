@@ -1,5 +1,5 @@
 //
-//  GiftcardView.swift
+//  GiftCardView.swift
 //  CinemaBookingSystem
 //
 //  Created by Tong Qian on 5/5/2024.
@@ -9,24 +9,24 @@
 
 import SwiftUI
 
-struct GiftcardView: View {
-    @ObservedObject var mainViewModel: MainViewModel
+struct GiftCardView: View {
+    @Binding var userAccount: User
 
     var body: some View {
         NavigationView {
-                    List(mainViewModel.userAccount.giftcard) { giftCard in
-                        VStack(alignment: .leading) {
-                            Text("Gift Card ID: \(giftCard.id)")
-                                .font(.headline)
-                            Text("Amount: $\(giftCard.amount)")
-                            Text("Expiration Date: \(giftCard.expirationDate)")
-                            // todo: other information
-                        }
-                        .padding(.vertical, 8)
-                    }
-                    .navigationTitle("My Gift Cards")
-                    //todo: add buy giftcard
+            List($userAccount.giftCards) { giftCard in
+                VStack(alignment: .leading) {
+                    Text("Gift Card ID: \(giftCard.id)")
+                        .font(.headline)
+                    Text("Amount: $\(giftCard.amount)")
+                    Text("Expiration Date: \(giftCard.expirationDate)")
+                    // todo: other information
                 }
+                .padding(.vertical, 8)
+            }
+            .navigationTitle("My Gift Cards")
+            //todo: add buy giftcard
+        }
     }
 }
 

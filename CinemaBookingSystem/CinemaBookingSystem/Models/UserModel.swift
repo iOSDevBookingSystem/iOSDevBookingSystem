@@ -19,7 +19,7 @@ struct User: Identifiable {
     var selectedGenres: Set<String> = []
     var selectedCinemas: Set<String> = []
     var orders: [Order]
-    var giftcard: [Giftcard]
+    var giftCards: [GiftCard]
     
     init(name: String, email: String, password: String, phoneNumber: String, gender: String, selectedGenres: Set<String>, selectedCinemas: Set<String>) {
         self.id = UUID()
@@ -31,7 +31,7 @@ struct User: Identifiable {
         self.selectedGenres = selectedGenres
         self.selectedCinemas = selectedCinemas
         self.orders = []
-        self.giftcard = []
+        self.giftCards = []
     }
     
     func getName() -> String {

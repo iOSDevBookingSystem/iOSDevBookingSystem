@@ -9,8 +9,10 @@ import SwiftUI
 
 //lists all movies
 struct MoviesView: View {
-    //@StateObject var viewModel = MoviesViewModel()
-    @ObservedObject var viewModel: SchedulesViewModel
+    @ObservedObject var viewModel: MoviesViewModel
+    @ObservedObject var cinemasViewModel: CinemasViewModel
+    @State var userAccount: User
+    
     var body: some View {
         ScrollView{
             HStack{
@@ -20,10 +22,10 @@ struct MoviesView: View {
                     .fontWeight(.bold)
                 Spacer()
             }
-            ForEach(viewModel.movies.movies){ movie in
+            ForEach(viewModel.getMovies()){ movie in
                 // click any movie to go to details page
                 NavigationLink{
-                    MovieDetailsView(viewModel: viewModel, movie: movie)
+                    MovieDetailsView(cinemasViewModel: cinemasViewModel, moviesViewModel: viewModel, userAccount: userAccount, movie: movie)
                 } label: {
                     VStack{
                         MovieView(movie: movie)
@@ -42,6 +44,6 @@ struct MoviesView: View {
     }
 }
 
-#Preview {
-    MoviesView(viewModel: SchedulesViewModel())
-}
+//#Preview {
+//    MoviesView(schedulesViewModel: SchedulesViewModel())
+//}

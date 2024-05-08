@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct CinemasView: View {
-    //@StateObject var viewModel = CinemasViewModel()
-    @ObservedObject var viewModel : SchedulesViewModel
+    @ObservedObject var viewModel: CinemasViewModel
+    @ObservedObject var moviesViewModel : MoviesViewModel
+    @State var userAccount: User
+    
     var body: some View {
         NavigationView {
             List{
-                ForEach(viewModel.cinemas.cinemas){ cinema in
+                ForEach(viewModel.getCinemas()){ cinema in
                     NavigationLink{
-                        CinemaView( viewModel: viewModel, cinema: cinema)
+                        CinemaView(cinema: cinema)
                     }label:{
                         Text(cinema.name)
                     }
@@ -29,6 +31,6 @@ struct CinemasView: View {
     }
 }
 
-#Preview {
-    CinemasView(viewModel: SchedulesViewModel())
-}
+//#Preview {
+//    CinemasView(viewModel: SchedulesViewModel())
+//}
