@@ -11,7 +11,7 @@ struct SettingsView: View {
     @State var userAccount: User
     
     var body: some View {
-        Text("Hello \(userAccount.name)")
+        Text("Specific app settings will go here")
     }
 }
 

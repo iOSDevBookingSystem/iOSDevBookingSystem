@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct UserAccountView: View {
-    @State var userAccount: User
+    @Binding var userAccount: User
     
     private var genres = GenreList.allGenres()
     private var cinemas = CinemaList.allCinemas()
     
-    init(userAccount: User) {
-        self.userAccount = userAccount
+    init(userAccount: Binding<User>) {
+        self._userAccount = userAccount
     }
 
     var body: some View {
@@ -29,8 +29,6 @@ struct UserAccountView: View {
                     Text("Female").tag("Female")
                 }
             }
-            
-            // TO-DO: Add button to change password
 
             Section(header: Text("Favorite Genres")) {
                 ForEach(genres, id: \.self) { genre in
@@ -55,11 +53,6 @@ struct UserAccountView: View {
                     }
                 }
             }
-
-            Button("Save") {
-                // TO-DO: Run update user profile function
-            }
-
         }
     }
 }

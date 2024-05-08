@@ -42,6 +42,9 @@ class AuthViewModel: ObservableObject {
     func logout() {
         self.isAuthenticated = false
         self.userAccount = nil
+        // TO-DO: test these are working
+        self.email = ""
+        self.password = ""
     }
     
     func loggedInUser() -> User? {

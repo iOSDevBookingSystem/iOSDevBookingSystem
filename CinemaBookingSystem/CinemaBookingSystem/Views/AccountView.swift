@@ -20,7 +20,7 @@ struct AccountView: View {
                         Text("My Orders")
                     }
 
-                    NavigationLink(destination: UserAccountView(userAccount: userAccount)) {
+                    NavigationLink(destination: UserAccountView(userAccount: $userAccount)) {
                         Text("My Personal Details")
                     }
 
