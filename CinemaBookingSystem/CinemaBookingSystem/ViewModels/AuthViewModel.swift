@@ -14,22 +14,22 @@ class AuthViewModel: ObservableObject {
     @Published var loginError: String = ""
     @Published var isLoggingIn: Bool = false
     
-    // Statically defined users for demonstation
-    let userAccount: User
+    private var userAccounts: [User] = []
+    var userAccount: User?
     
-    // Create the same user on init. Login would normally set user account after successful login
     init() {
-        userAccount = User(name: "Peter Parker", email: "peter@spiderman.com", password: "spiderman", phoneNumber: "02 1234 5678", gender: "Male", selectedGenres: Set(["Comedy"]), selectedCinemas:Set(["Cinema 1"]))
+        // Since there is no backend, storing users in this VM. Load in a dummy user
+        register(user: User(name: "Peter Parker", email: "peter@spiderman.com", password: "spiderman", phoneNumber: "02 1234 5678", gender: "Male", selectedGenres: Set(["Comedy"]), selectedCinemas:Set(["Cinema 1"]))) {} onFailure: {}
     }
     
-    func login(completion: (Bool) -> Void, onFailure: () -> Void) {
+    func login(completion: () -> Void, onFailure: () -> Void) {
         self.isLoggingIn = true
         
-        // Simulate a login request to a backend
-        if self.email == self.userAccount.email && self.password == self.userAccount.password {
+        if let user = validCredentials(email: self.email, password: self.password) {
             self.isAuthenticated = true
             self.loginError = ""
-            completion(true)
+            self.userAccount = user
+            completion()
         } else {
             self.isAuthenticated = false
             self.loginError = "Incorrect email or password. Please try again."
@@ -39,8 +39,42 @@ class AuthViewModel: ObservableObject {
         self.isLoggingIn = false
     }
     
-// TO-DO: do this
-//    func register() {
-//
-//    }
+    func logout() {
+        self.isAuthenticated = false
+        self.userAccount = nil
+        // TO-DO: test these are working
+        self.email = ""
+        self.password = ""
+    }
+    
+    func loggedInUser() -> User? {
+        return userAccount
+    }
+    
+    func userExists(email: String) -> Bool {
+        for user in self.userAccounts {
+            if email == user.email {
+                return true
+            }
+        }
+        return false
+    }
+    
+    private func validCredentials(email: String, password: String) -> User? {
+        for user in self.userAccounts {
+            if email == user.email && password == user.password {
+                return user
+            }
+        }
+        return nil
+    }
+
+
+    func register(user: User, completion: () -> Void, onFailure: () -> Void ) {
+        guard !userExists(email: user.email) else { onFailure(); return }
+        
+        self.userAccounts.append(user)
+        completion()
+    }
+    
 }

@@ -11,6 +11,7 @@ struct AuthView: View {
     @ObservedObject var viewModel: AuthViewModel
     @ObservedObject var schedViewModel: SchedulesViewModel
     @State private var shouldNavigate = false
+    @State private var showingRegistration = false
 
     var body: some View {
         NavigationStack {
@@ -41,7 +42,7 @@ struct AuthView: View {
                     .padding()
                 
                 Button(action: {
-                    viewModel.login { _ in
+                    viewModel.login {
                         shouldNavigate = true
                         print("Logged in successfully")
                     } onFailure: {
@@ -61,12 +62,20 @@ struct AuthView: View {
                     MainView(viewModel: MainViewModel(user: viewModel.userAccount), schedViewModel: schedViewModel)
                 }
 
-                NavigationLink("Register", destination: RegistrationView())
-                    .padding(.top, 20)
+                Button(action: {
+                    showingRegistration = true
+                }) {
+                    Text("Register")
+                }
+                .padding(.top, 20)
                 
                 Spacer()
             }
             .background(Color.white.edgesIgnoringSafeArea(.all))
+            
+        }
+        .fullScreenCover(isPresented: $showingRegistration) {
+            RegistrationView(authViewModel: viewModel, isPresented: $showingRegistration)
         }
     }
 }
