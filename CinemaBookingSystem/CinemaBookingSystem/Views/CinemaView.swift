@@ -17,6 +17,7 @@ struct CinemaView: View {
             Text("Movies Shown: ")
                 .font(.subheadline)
             ForEach(viewModel.movies.movies){ movie in
+                //show sessions after clicking
                 NavigationLink{
                     SessionView(viewModel: viewModel, movie: movie, cinema: cinema)
                 } label: {
@@ -38,6 +39,7 @@ struct CinemaView: View {
     
 }
 
+//display for sessions
 struct SessionView : View {
     @ObservedObject var viewModel: SchedulesViewModel
     @State var movie: Movie
@@ -49,6 +51,7 @@ struct SessionView : View {
             Text("Select session")
             ForEach(viewModel.schedules, id: \.self){ schedule in
                 if (schedule.movie.id == movie.id && schedule.cinema.id == cinema.id){
+                    //navigate to seat selection
                     NavigationLink{
                         SeatSelectionView(viewModel: SeatSelectionViewModel(session: schedule, maxSeats: 3))
                     } label:{

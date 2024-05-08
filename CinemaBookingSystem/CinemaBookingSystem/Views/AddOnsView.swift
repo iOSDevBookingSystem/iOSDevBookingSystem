@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//for order add-ons
 struct AddOnsView: View {
     @StateObject var viewModel = addOnViewModel()
     var body: some View {

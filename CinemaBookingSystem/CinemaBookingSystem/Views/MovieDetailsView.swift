@@ -12,6 +12,7 @@ struct MovieDetailsView: View {
     @State var movie: Movie
     var body: some View {
         ScrollView{
+            //show movie details
             VStack{
                 Image("\(movie.imageName)")
                     .resizable()
@@ -25,6 +26,7 @@ struct MovieDetailsView: View {
                     .foregroundColor(.black)
                     .multilineTextAlignment(.leading)
             }
+            //navigate to cinemas to purchase tickets
             NavigationLink{
                 CinemasView(viewModel: viewModel)
             } label:{

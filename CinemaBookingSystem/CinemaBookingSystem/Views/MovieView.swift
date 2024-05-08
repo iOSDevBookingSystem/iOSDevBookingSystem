@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+
+//movie preview display
 struct MovieView: View {
     @State var movie : Movie
     var body: some View {

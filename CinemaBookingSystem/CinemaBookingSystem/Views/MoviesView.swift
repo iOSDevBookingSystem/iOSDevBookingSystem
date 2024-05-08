@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//lists all movies
 struct MoviesView: View {
     //@StateObject var viewModel = MoviesViewModel()
     @ObservedObject var viewModel: SchedulesViewModel
@@ -20,6 +21,7 @@ struct MoviesView: View {
                 Spacer()
             }
             ForEach(viewModel.movies.movies){ movie in
+                // click any movie to go to details page
                 NavigationLink{
                     MovieDetailsView(viewModel: viewModel, movie: movie)
                 } label: {
