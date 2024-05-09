@@ -9,31 +9,30 @@ import SwiftUI
 
 struct CinemaView: View {
     @State var cinema: Cinema
+    @Binding var userAccount: User
     
     var body: some View{
-        Text("Cinema")
-        ScrollView{
-            Text("Movies Shown: ")
-                .font(.subheadline)
-            ForEach(cinema.getMoviesShown()){ movie in
-                //show sessions after clicking
-                NavigationLink{
-                    SessionsView(cinema: cinema, movie: movie)
-                } label: {
-                    VStack{
-                        MovieView(movie: movie)
-                        ZStack{
-                            Rectangle()
-                                .fill(.black)
-                                .frame(width: 200, height: 30)
-                                .cornerRadius(10.0)
-                            Text("Get Tickets")
-                                .foregroundStyle(.white)
+        VStack {
+            
+            Text("Choose from the following movies currently showing at \(cinema.name)")
+                .font(.headline)
+                .padding()
+            
+            ScrollView {
+                ForEach(cinema.getMoviesShown()){ movie in
+                    //show sessions after clicking
+                    NavigationLink{
+                        SessionsView(cinema: cinema, movie: movie, userAccount: $userAccount)
+                    } label: {
+                        VStack{
+                            MovieView(movie: movie)
                         }
                     }
                 }
             }
-        }.navigationTitle(cinema.name)
+        }
+        .navigationTitle("Movies Showing")
+        
     }
     
 }

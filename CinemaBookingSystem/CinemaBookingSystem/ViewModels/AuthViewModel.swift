@@ -17,11 +17,6 @@ class AuthViewModel: ObservableObject {
     private var userAccounts: [User] = []
     var userAccount: User?
     
-    init() {
-        // Since there is no backend, storing users in this VM. Load in a dummy user
-        register(user: User(name: "Peter Parker", email: "peter@spiderman.com", password: "spiderman", phoneNumber: "02 1234 5678", gender: "Male", selectedGenres: Set(["Comedy"]), selectedCinemas:Set(["Cinema 1"]))) {} onFailure: {}
-    }
-    
     func login(completion: () -> Void, onFailure: () -> Void) {
         self.isLoggingIn = true
         

@@ -9,14 +9,14 @@
 import SwiftUI
 
 struct AccountView: View {
-    @State var userAccount: User
+    @Binding var userAccount: User
     @Binding var isLoggedIn: Bool
 
     var body: some View {
         NavigationView {
             VStack {
                 List {
-                    NavigationLink(destination: OrderHistoryView(userAccount: userAccount)) {
+                    NavigationLink(destination: OrderHistoryView(userAccount: $userAccount)) {
                         Text("My Orders")
                     }
                     
