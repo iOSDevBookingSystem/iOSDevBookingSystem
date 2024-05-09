@@ -11,11 +11,11 @@ struct ContentView: View {
     @ObservedObject var authViewModel: AuthViewModel = AuthViewModel()
     @ObservedObject var cinemasViewModel: CinemasViewModel = CinemasViewModel()
     @ObservedObject var moviesViewModel: MoviesViewModel = MoviesViewModel()
-    
+
     var body: some View {
         Group {
             if authViewModel.isAuthenticated {
-                if let user = authViewModel.userAccount {
+                if let user = Binding($authViewModel.userAccount) {
                     TabView {
                         MoviesView(viewModel: moviesViewModel, cinemasViewModel: cinemasViewModel, userAccount: user)
                             .tabItem {
@@ -48,6 +48,12 @@ struct ContentView: View {
     }
     
     func populate() {
+        // Create users
+        let peterParker = User(name: "Peter Parker", email: "peter@spiderman.com", password: "spiderman", phoneNumber: "02 1234 5678", gender: "Male", selectedGenres: Set(["Comedy"]), selectedCinemas:Set(["Cinema 1"]))
+        let testingUser = User(name: "Testing User", email: "t", password: "t", phoneNumber: "02 1234 5678", gender: "Male", selectedGenres: Set(["Comedy"]), selectedCinemas:Set(["Cinema 2"]))
+        authViewModel.register(user: peterParker) {} onFailure: {}
+        authViewModel.register(user: testingUser) {} onFailure: {}
+        
         // Add cinemas
         let sydneyCinema = Cinema(id: 1, name: "Sydney City", address: "George St", rooms: [Room(id: 1, layout: Layout(leftSeats: 2, middleSeats: 5, rightSeats: 2, rowCount: 10))])
         let blacktownCinema = Cinema(id: 2, name: "Blacktown", address: "Main St", rooms: [Room(id: 1, layout: Layout(leftSeats: 2, middleSeats: 5, rightSeats: 2, rowCount: 10))])
@@ -66,7 +72,6 @@ struct ContentView: View {
         self.cinemasViewModel.addSessionToCinema(name: "Blacktown", movie: spiderManMovie, time: "16:00")
         self.cinemasViewModel.addSessionToCinema(name: "Blacktown", movie: ironManMovie, time: "19:00")
 
-        
     }
 }
 

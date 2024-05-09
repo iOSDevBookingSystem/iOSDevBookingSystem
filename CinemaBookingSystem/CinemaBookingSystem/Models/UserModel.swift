@@ -38,14 +38,4 @@ struct User: Identifiable {
         return self.name
     }
     
-//    func updateProfile(name: String, email: String, password: String, phoneNumber: String, gender: String, selectedGenres: Set<String>, selectedCinemas: Set<String>) {
-//        self.name = name
-//        self.email = email
-//        self.password = password
-//        self.phoneNumber = phoneNumber
-//        self.gender = gender
-//        self.selectedGenres = selectedGenres
-//        self.selectedCinemas = selectedCinemas
-//    }
-
 }

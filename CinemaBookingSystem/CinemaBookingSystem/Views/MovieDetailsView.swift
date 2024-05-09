@@ -10,7 +10,7 @@ import SwiftUI
 struct MovieDetailsView: View {
     @ObservedObject var cinemasViewModel : CinemasViewModel
     @ObservedObject var moviesViewModel: MoviesViewModel
-    @State var userAccount: User
+    @Binding var userAccount: User
     @State var movie: Movie
     
     var body: some View {
@@ -31,7 +31,7 @@ struct MovieDetailsView: View {
             }
             //navigate to cinemas to purchase tickets
             NavigationLink{
-                CinemasView(viewModel: cinemasViewModel, moviesViewModel: moviesViewModel, userAccount: userAccount)
+                CinemasView(viewModel: cinemasViewModel, moviesViewModel: moviesViewModel, userAccount: $userAccount)
             } label:{
                 ZStack{
                     Rectangle()

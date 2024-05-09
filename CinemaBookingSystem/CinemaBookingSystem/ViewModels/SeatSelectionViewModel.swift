@@ -14,6 +14,7 @@ class SeatSelectionViewModel: ObservableObject {
     
     @Published var seats: [String: [String: Bool]] = [:]
     @Published var selectedSeats: Set<String> = []
+    @Published var selectedAllSeats: Bool = false
     
     // Layout of the cinema room
     var layout: Layout?
@@ -64,6 +65,8 @@ class SeatSelectionViewModel: ObservableObject {
             }
             self.seats[row] = rowSeats
         }
+        
+        self.selectedAllSeats = self.selectedSeats.count == self.maxSeats ? true : false
     }
     
     func setSeatTaken(_ seatID: String) {

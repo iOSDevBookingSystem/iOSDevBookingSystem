@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct Ticket {
     var id: UUID = UUID()
     var name: String

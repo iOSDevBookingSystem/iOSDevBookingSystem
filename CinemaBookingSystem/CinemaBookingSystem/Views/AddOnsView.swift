@@ -7,31 +7,24 @@
 
 import SwiftUI
 
-//for order add-ons
 struct AddOnsView: View {
-    @StateObject var viewModel = addOnViewModel()
-    var orderViewModel: OrderViewModel
-    var userAccount: User
-    
-    init(orderViewModel: OrderViewModel, userAccount: User) {
-        self.orderViewModel = orderViewModel
-        self.userAccount = userAccount
-    }
-    
+//    @ObservedObject var viewModel: AddOnViewModel = AddOnViewModel()
+    @ObservedObject var orderViewModel: OrderViewModel
+    @Binding var userAccount: User
+
     var body: some View {
-        ScrollView{
-            HStack{
-                Text("Add-ons")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .padding(.leading)
-                Spacer()
+        VStack {
+            Form {
+                Section(header: Text("Select add-ons")) {
+                    ForEach(ItemType.allCases, id: \.self) { type in
+                        if let binding = Binding($orderViewModel.addOns[type]) {
+                            AddOnCounter(type: type, count: binding)
+                        }
+                    }
+                }
             }
-            ForEach(viewModel.consumables){ consumable in
-                AddOnView(consumable: consumable)
-            }
-            
-            NavigationLink("Add To Order", destination: PaymentView(orderViewModel: orderViewModel, userAccount: userAccount))
+            Spacer()
+            NavigationLink("Add To Order", destination: PaymentView(orderViewModel: orderViewModel, userAccount: $userAccount))
                 .padding()
                 .frame(maxWidth: .infinity)
                 .background(Color.black)
@@ -40,8 +33,29 @@ struct AddOnsView: View {
                 .frame(width: 300, height: 40)
                 .padding()
         }
+        .navigationTitle("Add-on Selection")
+        .padding(.top)
+    }
+
+}
+
+struct AddOnCounter: View {
+    var type: ItemType
+    @Binding var count: Int
+
+    var body: some View {
+        HStack {
+            Text(type.rawValue)
+            Spacer()
+            Text("$\(String(format: "%.2f", type.details.price))")
+            Stepper(value: $count, in: 0...10) {
+                Text("\(count)")
+            }
+        }
     }
 }
+
+
 
 //#Preview {
 //    AddOnsView(cinema: Cinema, session: T##Session, tickets: T##[TicketType : Int])

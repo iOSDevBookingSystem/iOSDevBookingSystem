@@ -10,21 +10,27 @@ import SwiftUI
 struct SessionsView: View {
     @State var cinema: Cinema
     @State var movie: Movie
-    var userAccount: User
+    @Binding var userAccount: User
     
     var body: some View {
-        NavigationView {
+        VStack {
+            
+            Text("Choose from the list of available sessions for \(movie.name) at \(cinema.name)")
+                .font(.headline)
+                .padding()
+            
             List{
                 ForEach(cinema.getSessions(for: movie)){ session in
                     NavigationLink{
-                        TicketSelectionView(cinema: cinema, session: session, userAccount: userAccount)
+                        TicketSelectionView(cinema: cinema, session: session, userAccount: $userAccount)
                     }label:{
                         Text(session.time)
                     }
                 }
             }
-            .navigationTitle("Cinemas")
+            
         }
+        .navigationTitle("Available Sessions")
         
         
 //        ScrollView{

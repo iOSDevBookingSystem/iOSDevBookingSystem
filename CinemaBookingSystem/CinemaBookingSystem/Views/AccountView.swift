@@ -9,16 +9,16 @@
 import SwiftUI
 
 struct AccountView: View {
-    @State var userAccount: User
+    @Binding var userAccount: User
     @Binding var isLoggedIn: Bool
 
     var body: some View {
         NavigationView {
             VStack {
                 List {
-//                    NavigationLink(destination: OrderHistoryView(userAccount: userAccount)) {
-//                        Text("My Orders")
-//                    }
+                    NavigationLink(destination: OrderHistoryView(userAccount: $userAccount)) {
+                        Text("My Orders")
+                    }
                     
                     NavigationLink(destination: GiftCardView(userAccount: $userAccount)) {
                         Text("My Gift Cards")

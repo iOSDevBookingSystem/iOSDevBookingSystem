@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SeatSelectionView: View {
     @ObservedObject var viewModel: SeatSelectionViewModel
-    var userAccount: User
+    @Binding var userAccount: User
 
     var body: some View {
         VStack {
@@ -45,13 +45,16 @@ struct SeatSelectionView: View {
                 }
                 .padding()
                 
-                NavigationLink("Continue", destination: AddOnsView(orderViewModel: OrderViewModel(cinema: viewModel.cinema, session: viewModel.session, tickets: viewModel.tickets, userAccount: userAccount, selectedSeats: viewModel.selectedSeats), userAccount: userAccount))
+                Text("Chosen \(viewModel.selectedSeats.count) out of \(viewModel.maxSeats) seats")
+                
+                NavigationLink("Continue", destination: AddOnsView(orderViewModel: OrderViewModel(cinema: viewModel.cinema, session: viewModel.session, tickets: viewModel.tickets, userAccount: userAccount, selectedSeats: viewModel.selectedSeats), userAccount: $userAccount))
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(Color.blue)
+                    .background(viewModel.selectedAllSeats ? Color.blue : Color.gray)
                     .foregroundColor(.white)
                     .cornerRadius(10)
                     .padding()
+                    .disabled(!viewModel.selectedAllSeats)
                 
             } else {
                 Text("No layout available")
