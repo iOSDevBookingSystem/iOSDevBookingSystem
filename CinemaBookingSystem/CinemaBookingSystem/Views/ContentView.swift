@@ -66,8 +66,8 @@ struct ContentView: View {
         self.cinemasViewModel.addCinema(cinema: blacktownCinema)
         
         // Add Movies
-        let spiderManMovie = Movie(id: 0, name: "Spider-Man", genre: "Comedy", description: "Movie about spiders", imageName: "spiderman")
-        let ironManMovie = Movie(id: 1, name: "Iron-Man", genre: "Action", description: "Movie about a man in an iron suit", imageName: "ironman")
+        let spiderManMovie = Movie(id: 0, name: "Spider-Man", genre: "Comedy", description: "Movie about spiders", longDescription: "Movie about spiders", imageName: "spiderman")
+        let ironManMovie = Movie(id: 1, name: "Iron-Man", genre: "Action", description: "Movie about a man in an iron suit", longDescription: "Movie about a man in an iron suit", imageName: "ironman")
         self.moviesViewModel.addMovie(movie: spiderManMovie)
         self.moviesViewModel.addMovie(movie: ironManMovie)
         

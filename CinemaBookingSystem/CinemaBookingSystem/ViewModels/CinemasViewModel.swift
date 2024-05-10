@@ -30,7 +30,7 @@ class CinemasViewModel: ObservableObject {
     func getCinemas() -> [Cinema] {
         return self.cinemas
     }
-
+    
     func addSessionToCinema(name: String, movie: Movie, time: String) {
         guard let index = cinemas.firstIndex(where: { $0.name == name }) else {
             print("Cinema not found")
@@ -38,3 +38,4 @@ class CinemasViewModel: ObservableObject {
         }
         cinemas[index].addSession(movie: movie, time: time)
     }
+}

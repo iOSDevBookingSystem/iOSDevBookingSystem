@@ -46,7 +46,7 @@ struct MovieView: View {
 }
 
 #Preview {
-    let spiderManMovie = Movie(id: 0, name: "Spider-Man", genre: "Comedy", description: "Movie about spiders", imageName: "spiderman")
+    let spiderManMovie = Movie(id: 0, name: "Spider-Man", genre: "Comedy", description: "Movie about spiders", longDescription: "Movie about spiders", imageName: "spiderman")
     
     return MovieView(movie: spiderManMovie)
 }
