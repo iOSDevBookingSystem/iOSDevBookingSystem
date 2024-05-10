@@ -26,12 +26,6 @@ struct MovieView: View {
                     .fontWeight(.thin)
                     .foregroundColor(.black)
                     .multilineTextAlignment(.leading)
-                
-                Text(movie.longDescription)
-                    .font(.subheadline)
-                    .fontWeight(.thin)
-                    .foregroundColor(.black)
-                    .multilineTextAlignment(.leading)
             }
             
             Spacer()

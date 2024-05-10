@@ -28,6 +28,11 @@ struct MovieDetailsView: View {
                     .fontWeight(.thin)
                     .foregroundColor(.black)
                     .multilineTextAlignment(.leading)
+                Text(movie.longDescription)
+                    .font(.subheadline)
+                    .fontWeight(.thin)
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.leading)
             }
             //navigate to cinemas to purchase tickets
             NavigationLink{
