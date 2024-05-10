@@ -10,6 +10,7 @@ import SwiftUI
 struct CinemaView: View {
     @State var cinema: Cinema
     @Binding var userAccount: User
+    @Binding var isOrdering: Bool
     
     var body: some View{
         VStack {
@@ -22,7 +23,7 @@ struct CinemaView: View {
                 ForEach(cinema.getMoviesShown()){ movie in
                     //show sessions after clicking
                     NavigationLink{
-                        SessionsView(cinema: cinema, movie: movie, userAccount: $userAccount)
+                        SessionsView(cinema: cinema, movie: movie, userAccount: $userAccount, isOrdering: $isOrdering)
                     } label: {
                         VStack{
                             MovieView(movie: movie)

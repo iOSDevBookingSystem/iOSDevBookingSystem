@@ -11,27 +11,29 @@ struct OrderHistoryView: View {
     @Binding var userAccount: User
 
     var body: some View {
-        List(userAccount.orders, id: \.self) { order in
-            VStack(alignment: .leading) {
-                Text("Order \(order.id)")
-                    .font(.headline)
-                Text("Session: \(order.session.movie.name) at \(order.cinema.name)")
-                    .font(.subheadline)
+        if userAccount.orders.isEmpty {
+            // Display a message when there are no orders
+            Text("You don't have any orders.")
+                .font(.title)
+                .padding()
+                .multilineTextAlignment(.center)
+        } else {
+            // List the orders when there are some
+            List(userAccount.orders, id: \.self) { order in
+                VStack(alignment: .leading) {
+                    NavigationLink(destination: OrderView(order: order)) {
+                        VStack(alignment: .leading) {
+                            Text("Order \(order.id)")
+                                .font(.headline)
+                                .padding()
 
-                if !order.items.isEmpty {
-                    Text("Add-ons:")
-                        .font(.caption)
-                    ForEach(order.items, id: \.self) { itemType in
-                        Text("\(itemType.rawValue) - $\(itemType.details.price, specifier: "%.2f")")
-                    }
-                }
+                            Text("\(order.session.movie.name) at \(order.cinema.name)")
+                                .font(.subheadline)
+                                .padding()
 
-                if !order.tickets.isEmpty {
-                    Text("Tickets:")
-                        .font(.caption)
-                    ForEach(order.tickets, id: \.id) { ticket in
-                        NavigationLink(destination: TicketView(ticket: ticket)) {
-                            Text("\(ticket.type.rawValue) - \(ticket.name)")
+                            Text("Session: \(order.session.time)")
+                                .font(.subheadline)
+                                .padding()
                         }
                     }
                 }

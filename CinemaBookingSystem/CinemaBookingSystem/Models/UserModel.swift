@@ -38,4 +38,15 @@ struct User: Identifiable {
         return self.name
     }
     
+    func getGiftCards() -> [GiftCard] {
+        return self.giftCards
+    }
+    
+    mutating func addGiftCard(_ giftCard: GiftCard) {
+        print("Adding giftcard with amount \(giftCard.balance)")
+        print(self.giftCards)
+        self.giftCards.append(giftCard)
+        print(self.giftCards)
+    }
+    
 }

@@ -38,24 +38,3 @@ class CinemasViewModel: ObservableObject {
         }
         cinemas[index].addSession(movie: movie, time: time)
     }
-    
-//    func addSessionToCinema(name: String, movie: Movie, time: String) {
-//        if let index = cinemas.firstIndex(where: { $0.name == name }) {
-//            var cinema = cinemas[index]
-//            cinema.addSession(movie: movie, time: time)
-//            cinemas[index] = cinema  // Ensure the updated cinema is saved back to the array
-//        } else {
-//            print("Cinema not found")
-//        }
-//    }
-//    
-//    func addSessionToCinema(name: String, movie: Movie, time: String) {
-//        guard let index = cinemas.firstIndex(where: { $0.name == name }),
-//              let cinema = cinemas[index] else {
-//            print("Cinema not found")
-//            return
-//        }
-//        cinema.addSession(movie: movie, time: time)
-//        cinemas[index] = cinema
-//    }
-}

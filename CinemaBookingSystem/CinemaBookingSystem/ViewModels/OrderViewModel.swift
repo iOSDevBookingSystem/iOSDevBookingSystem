@@ -15,6 +15,7 @@ class OrderViewModel: ObservableObject {
     var selectedSeats: Set<String>
     
     @Published var addOns: [ItemType: Int]
+    @Published var selectedGiftCards: Set<UUID>
     
     init(cinema: Cinema, session: Session, tickets: [TicketType: Int], userAccount: User, selectedSeats: Set<String>) {
         self.cinema = cinema
@@ -23,11 +24,7 @@ class OrderViewModel: ObservableObject {
         self.addOns = [.regularPopcorn: 0, .largePopcorn: 0, .refillableDrink: 0, .collectableCup: 0]
         self.userAccount = userAccount
         self.selectedSeats = selectedSeats
-    }
-    
-    func completeOrder() {
-        print("Order Completed")
-        userAccount.orders.append(Order(payment_method: "Card", items: generateAddOns(), tickets: generateTickets(), cinema: cinema, session: session))
+        self.selectedGiftCards = []
     }
     
     func generateAddOns() -> [ItemType] {
@@ -70,10 +67,4 @@ class OrderViewModel: ObservableObject {
         return ticketTotal + addOnTotal
     }
     
-//    func getConsumables() {
-//        var consumables: [Consumable] = []
-//        consumables.append(Consumable(name: "Regular Popcorn", price: 7.99, category: "Food", description: "Regular sized popcorn"))
-//        consumables.append(Consumable(name: "Large Popcorn", price: 10.99, category: "Food", description: "Large sized popcorn"))
-//        consumables.append(Consumable(name: "Reffilable Drink", price: 3.99, category: "Drink", description: "Self-serve refillable drink"))
-//    }
 }

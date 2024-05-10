@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct AddOnsView: View {
-//    @ObservedObject var viewModel: AddOnViewModel = AddOnViewModel()
     @ObservedObject var orderViewModel: OrderViewModel
     @Binding var userAccount: User
+    @Binding var isOrdering: Bool
 
     var body: some View {
         VStack {
@@ -24,13 +24,12 @@ struct AddOnsView: View {
                 }
             }
             Spacer()
-            NavigationLink("Add To Order", destination: PaymentView(orderViewModel: orderViewModel, userAccount: $userAccount))
+            NavigationLink("Add To Order", destination: PaymentView(orderViewModel: orderViewModel, userAccount: $userAccount, isOrdering: $isOrdering))
                 .padding()
                 .frame(maxWidth: .infinity)
-                .background(Color.black)
+                .background(Color.blue)
                 .foregroundColor(.white)
-                .cornerRadius(15.0)
-                .frame(width: 300, height: 40)
+                .cornerRadius(10)
                 .padding()
         }
         .navigationTitle("Add-on Selection")

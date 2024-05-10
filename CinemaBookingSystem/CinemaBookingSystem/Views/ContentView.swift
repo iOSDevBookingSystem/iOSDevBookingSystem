@@ -29,7 +29,7 @@ struct ContentView: View {
                         
                         AccountView(userAccount: user, isLoggedIn: $authViewModel.isAuthenticated)
                             .tabItem {
-                                Label("Account Settings", systemImage: "gear")
+                                Label("My Account", systemImage: "person.fill")
                             }
                     }
                     
@@ -48,9 +48,14 @@ struct ContentView: View {
     }
     
     func populate() {
+        // Create gift cards
+        let giftCard = GiftCard(amount: 40.00)
+        
         // Create users
-        let peterParker = User(name: "Peter Parker", email: "peter@spiderman.com", password: "spiderman", phoneNumber: "02 1234 5678", gender: "Male", selectedGenres: Set(["Comedy"]), selectedCinemas:Set(["Cinema 1"]))
-        let testingUser = User(name: "Testing User", email: "t", password: "t", phoneNumber: "02 1234 5678", gender: "Male", selectedGenres: Set(["Comedy"]), selectedCinemas:Set(["Cinema 2"]))
+        var peterParker = User(name: "Peter Parker", email: "peter@spiderman.com", password: "spiderman", phoneNumber: "02 1234 5678", gender: "Male", selectedGenres: Set(["Comedy"]), selectedCinemas:Set(["Cinema 1"]))
+        var testingUser = User(name: "Testing User", email: "t", password: "t", phoneNumber: "02 1234 5678", gender: "Male", selectedGenres: Set(["Comedy"]), selectedCinemas:Set(["Cinema 2"]))
+
+        testingUser.addGiftCard(giftCard)
         authViewModel.register(user: peterParker) {} onFailure: {}
         authViewModel.register(user: testingUser) {} onFailure: {}
         

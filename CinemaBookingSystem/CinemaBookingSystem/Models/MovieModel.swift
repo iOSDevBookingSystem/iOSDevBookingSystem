@@ -12,13 +12,15 @@ struct Movie: Codable, Hashable, Identifiable{
     var name: String
     var genre: String
     var description: String
+    var longDescription: String
     var imageName : String
     
-    init(id: Int, name: String, genre: String, description: String, imageName: String) {
+    init(id: Int, name: String, genre: String, description: String, longDescription: String imageName: String) {
         self.id = id
         self.name = name
         self.genre = genre
         self.description = description
+        self.longDescription = longDescription
         self.imageName = imageName
     }
 }

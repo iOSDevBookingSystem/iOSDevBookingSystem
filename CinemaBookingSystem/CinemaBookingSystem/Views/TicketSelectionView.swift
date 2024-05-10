@@ -11,6 +11,7 @@ struct TicketSelectionView: View {
     let cinema: Cinema
     let session: Session
     @Binding var userAccount: User
+    @Binding var isOrdering: Bool
 
     @State private var tickets: [TicketType: Int] = [.adult: 0, .child: 0, .student: 0, .concession: 0]
 
@@ -26,7 +27,7 @@ struct TicketSelectionView: View {
                 }
             }
             Spacer()
-            NavigationLink("Continue", destination: SeatSelectionView(viewModel: SeatSelectionViewModel(cinema: cinema, session: session, tickets: tickets), userAccount: $userAccount))
+            NavigationLink("Continue", destination: SeatSelectionView(viewModel: SeatSelectionViewModel(cinema: cinema, session: session, tickets: tickets), userAccount: $userAccount, isOrdering: $isOrdering))
                 .padding()
                 .frame(maxWidth: .infinity)
                 .background(Color.blue)

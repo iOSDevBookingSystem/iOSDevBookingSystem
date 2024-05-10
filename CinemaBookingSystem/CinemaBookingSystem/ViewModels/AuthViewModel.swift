@@ -35,11 +35,12 @@ class AuthViewModel: ObservableObject {
     }
     
     func logout() {
-        self.isAuthenticated = false
-        self.userAccount = nil
-        // TO-DO: test these are working
-        self.email = ""
-        self.password = ""
+        // TODO: These are not working
+        isAuthenticated = false
+        userAccount = nil
+        email = ""
+        password = ""
+        print("Logging out: email = \(email), password = \(password)")
     }
     
     func loggedInUser() -> User? {
@@ -47,22 +48,13 @@ class AuthViewModel: ObservableObject {
     }
     
     func userExists(email: String) -> Bool {
-        for user in self.userAccounts {
-            if email == user.email {
-                return true
-            }
-        }
-        return false
+        return userAccounts.contains { $0.email == email }
     }
     
     private func validCredentials(email: String, password: String) -> User? {
-        for user in self.userAccounts {
-            if email == user.email && password == user.password {
-                return user
-            }
-        }
-        return nil
+        return userAccounts.first { $0.email == email && $0.password == password }
     }
+
 
 
     func register(user: User, completion: () -> Void, onFailure: () -> Void ) {

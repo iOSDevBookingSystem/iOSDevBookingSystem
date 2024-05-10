@@ -10,6 +10,7 @@ import SwiftUI
 struct SeatSelectionView: View {
     @ObservedObject var viewModel: SeatSelectionViewModel
     @Binding var userAccount: User
+    @Binding var isOrdering: Bool
 
     var body: some View {
         VStack {
@@ -47,7 +48,7 @@ struct SeatSelectionView: View {
                 
                 Text("Chosen \(viewModel.selectedSeats.count) out of \(viewModel.maxSeats) seats")
                 
-                NavigationLink("Continue", destination: AddOnsView(orderViewModel: OrderViewModel(cinema: viewModel.cinema, session: viewModel.session, tickets: viewModel.tickets, userAccount: userAccount, selectedSeats: viewModel.selectedSeats), userAccount: $userAccount))
+                NavigationLink("Continue", destination: AddOnsView(orderViewModel: OrderViewModel(cinema: viewModel.cinema, session: viewModel.session, tickets: viewModel.tickets, userAccount: userAccount, selectedSeats: viewModel.selectedSeats), userAccount: $userAccount, isOrdering: $isOrdering))
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(viewModel.selectedAllSeats ? Color.blue : Color.gray)
