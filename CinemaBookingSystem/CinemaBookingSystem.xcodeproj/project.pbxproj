@@ -43,6 +43,7 @@
 		B524763D2BE73A5C0045B89F /* MoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B524763C2BE73A5C0045B89F /* MoviesView.swift */; };
 		B524763F2BE78D890045B89F /* AddOnsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B524763E2BE78D890045B89F /* AddOnsView.swift */; };
 		B53300772BEB7311005BCA9B /* MovieDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53300762BEB7311005BCA9B /* MovieDetailsView.swift */; };
+		B53300792BEF1654005BCA9B /* CinemaSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53300782BEF1654005BCA9B /* CinemaSelectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +84,7 @@
 		B524763C2BE73A5C0045B89F /* MoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesView.swift; sourceTree = "<group>"; };
 		B524763E2BE78D890045B89F /* AddOnsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOnsView.swift; sourceTree = "<group>"; };
 		B53300762BEB7311005BCA9B /* MovieDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsView.swift; sourceTree = "<group>"; };
+		B53300782BEF1654005BCA9B /* CinemaSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 				B524763E2BE78D890045B89F /* AddOnsView.swift */,
 				65BE0F752BECFFA700BCAB5B /* TicketView.swift */,
 				65BE0F7B2BEE2FC900BCAB5B /* OrderView.swift */,
+				B53300782BEF1654005BCA9B /* CinemaSelectionView.swift */,
 				65C741132BE10D45004C92B1 /* OrderHistoryView.swift */,
 				65BE0F792BEE1A2000BCAB5B /* GiftCardsView.swift */,
 				65C741172BE10E12004C92B1 /* RegistrationView.swift */,
@@ -267,6 +270,7 @@
 				65C741142BE10D45004C92B1 /* OrderHistoryView.swift in Sources */,
 				B524762B2BDF679C0045B89F /* ContentView.swift in Sources */,
 				B52476292BDF679C0045B89F /* CinemaBookingSystemApp.swift in Sources */,
+				B53300792BEF1654005BCA9B /* CinemaSelectionView.swift in Sources */,
 				6502C3442BEB926000172CCE /* SessionsView.swift in Sources */,
 				65C7412A2BE12AEC004C92B1 /* MovieModel.swift in Sources */,
 				65C741202BE11E09004C92B1 /* SettingsView.swift in Sources */,

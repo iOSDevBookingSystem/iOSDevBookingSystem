@@ -12,24 +12,40 @@ struct MoviesView: View {
     @ObservedObject var cinemasViewModel: CinemasViewModel
     @Binding var userAccount: User
     
+    @State var isOrdering: Bool = false
+    @State private var selectedMovie: Movie?
+    
     var body: some View {
-        VStack {
-            
-            NavigationView {
+        VStack{
+            NavigationView{
                 ScrollView{
                     ForEach(viewModel.getMovies()){ movie in
-                        NavigationLink{
-                            MovieDetailsView(cinemasViewModel: cinemasViewModel, moviesViewModel: viewModel, userAccount: $userAccount, movie: movie)
-                        } label: {
-                            VStack{
-                                MovieView(movie: movie)
-                            }
-                        }
+                        Button(action: {
+                            selectedMovie = movie
+                            isOrdering = true
+                        }, label: {
+                            MovieView(movie: movie)
+                        })
                     }
                 }
-                .navigationTitle("Current Movies")   
+                .navigationTitle("Movies Showing")
             }
-            
+            .fullScreenCover(isPresented: $isOrdering, onDismiss: {
+                isOrdering = false
+            }) {
+                if let movie = selectedMovie{
+                    NavigationView{
+                        MovieDetailsView(cinemasViewModel: cinemasViewModel, moviesViewModel: viewModel, userAccount: $userAccount, isOrdering: $isOrdering, movie: movie)
+                            .toolbar{
+                                ToolbarItem(placement: .navigationBarLeading){
+                                    Button("Cancel"){
+                                        isOrdering = false
+                                    }
+                                }
+                            }
+                    }
+                }
+            }
         }
     }
 }

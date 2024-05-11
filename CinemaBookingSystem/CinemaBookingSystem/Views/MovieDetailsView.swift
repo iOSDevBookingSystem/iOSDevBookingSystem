@@ -11,6 +11,7 @@ struct MovieDetailsView: View {
     @ObservedObject var cinemasViewModel : CinemasViewModel
     @ObservedObject var moviesViewModel: MoviesViewModel
     @Binding var userAccount: User
+    @Binding var isOrdering: Bool
     @State var movie: Movie
     
     var body: some View {
@@ -35,8 +36,10 @@ struct MovieDetailsView: View {
                     .multilineTextAlignment(.leading)
             }
             //navigate to cinemas to purchase tickets
+            
             NavigationLink{
-                CinemasView(viewModel: cinemasViewModel, moviesViewModel: moviesViewModel, userAccount: $userAccount)
+                //CinemasView(viewModel: cinemasViewModel, moviesViewModel: moviesViewModel, userAccount: $userAccount)
+                CinemaSelectionView(viewModel: cinemasViewModel, userAccount: $userAccount, isOrdering: $isOrdering, movie: movie)
             } label:{
                 ZStack{
                     Rectangle()
