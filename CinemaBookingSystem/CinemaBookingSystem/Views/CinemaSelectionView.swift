@@ -15,9 +15,22 @@ struct CinemaSelectionView: View {
     
     var body: some View {
         List {
+            Text("Favorite Cinemas: ")
+                .fontWeight(.bold)
             ForEach(viewModel.getCinemas()) { cinema in
-                NavigationLink(cinema.name){
-                    SessionsView(cinema: cinema, movie: movie, userAccount: $userAccount, isOrdering: $isOrdering)
+                if userAccount.selectedCinemas.contains(cinema.name){
+                    NavigationLink(cinema.name){
+                        SessionsView(cinema: cinema, movie: movie, userAccount: $userAccount, isOrdering: $isOrdering)
+                    }
+                }
+            }
+            Text("Other Cinemas: ")
+                .fontWeight(.bold)
+            ForEach(viewModel.getCinemas()) { cinema in
+                if !userAccount.selectedCinemas.contains(cinema.name){
+                    NavigationLink(cinema.name){
+                        SessionsView(cinema: cinema, movie: movie, userAccount: $userAccount, isOrdering: $isOrdering)
+                    }
                 }
             }
         }.navigationTitle("Select Cinema")

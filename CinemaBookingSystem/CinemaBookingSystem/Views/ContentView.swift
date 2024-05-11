@@ -52,8 +52,8 @@ struct ContentView: View {
         let giftCard = GiftCard(amount: 40.00)
         
         // Create users
-        var peterParker = User(name: "Peter Parker", email: "peter@spiderman.com", password: "spiderman", phoneNumber: "02 1234 5678", gender: "Male", selectedGenres: Set(["Comedy"]), selectedCinemas:Set(["Cinema 1"]))
-        var testingUser = User(name: "Testing User", email: "t", password: "t", phoneNumber: "02 1234 5678", gender: "Male", selectedGenres: Set(["Comedy"]), selectedCinemas:Set(["Cinema 2"]))
+        var peterParker = User(name: "Peter Parker", email: "peter@spiderman.com", password: "spiderman", phoneNumber: "02 1234 5678", gender: "Male", selectedGenres: Set(["Comedy"]), selectedCinemas:Set(["Sydney City"]))
+        var testingUser = User(name: "Testing User", email: "t", password: "t", phoneNumber: "02 1234 5678", gender: "Male", selectedGenres: Set(["Comedy"]), selectedCinemas:Set(["Blacktown"]))
 
         testingUser.addGiftCard(giftCard)
         authViewModel.register(user: peterParker) {} onFailure: {}

@@ -24,7 +24,7 @@ struct MovieDetailsView: View {
                 Text(movie.name)
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                     .foregroundColor(.black)
-                Text(movie.description)
+                Text(movie.genre)
                     .font(.body)
                     .fontWeight(.thin)
                     .foregroundColor(.black)
