@@ -8,7 +8,6 @@
 
 import Foundation
 
-// TO-DO: add Codeable
 struct User: Identifiable {
     let id: UUID
     var name: String = ""

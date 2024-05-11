@@ -10,11 +10,11 @@ import Foundation
 
 struct Order: Identifiable, Hashable {
     var id: UUID = UUID()
-    var payment_method: String
     var items: [ItemType]
     var tickets: [Ticket]
     var cinema: Cinema
     var session: Session
+    var paymentBreakdown: [String: Double]
     
     // Implement the Hashable protocol
     static func == (lhs: Order, rhs: Order) -> Bool {
@@ -23,6 +23,10 @@ struct Order: Identifiable, Hashable {
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+    }
+    
+    var paymentBreakdownArray: [(key: String, value: Double)] {
+        self.paymentBreakdown.map { ($0.key, $0.value) }.sorted { $0.key < $1.key }
     }
 }
 

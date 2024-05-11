@@ -7,7 +7,6 @@
 
 import Foundation
 
-// TO-DO: add Codeable
 enum GenreList: String, CaseIterable, Hashable {
     case action = "Action"
     case comedy = "Comedy"
@@ -22,12 +21,9 @@ enum GenreList: String, CaseIterable, Hashable {
     }
 }
 
-// TO-DO: add Codeable
 enum CinemaList: String, CaseIterable, Hashable {
     case sydney = "Sydney City"
     case blacktown = "Blacktown"
-//    case cinema3 = "Cinema 3"
-//    case cinema4 = "Cinema 4"
     
     static func allCinemas() -> [String] {
         return CinemaList.allCases.map { $0.rawValue }
