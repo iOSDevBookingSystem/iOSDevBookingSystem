@@ -38,7 +38,7 @@ struct MovieDetailsView: View {
             //navigate to cinemas to purchase tickets
             
             NavigationLink{
-                //CinemasView(viewModel: cinemasViewModel, moviesViewModel: moviesViewModel, userAccount: $userAccount)
+                // proceed to select cinema
                 CinemaSelectionView(viewModel: cinemasViewModel, userAccount: $userAccount, isOrdering: $isOrdering, movie: movie)
             } label:{
                 ZStack{

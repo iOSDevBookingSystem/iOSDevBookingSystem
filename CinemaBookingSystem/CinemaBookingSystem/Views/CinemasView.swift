@@ -19,23 +19,25 @@ struct CinemasView: View {
         VStack {
             NavigationView {
                 List {
-                    Text("Favorite Cinemas: ")
-                        .fontWeight(.bold)
-                    ForEach(viewModel.getCinemas()) { cinema in
-                        if(userAccount.selectedCinemas.contains(cinema.name)){
-                            Button(cinema.name) {
-                                selectedCinema = cinema
-                                isOrdering = true
+                    //show favorites
+                    Section(header: Text("Favorite Cinemas")){
+                        ForEach(viewModel.getCinemas()) { cinema in
+                            if(userAccount.selectedCinemas.contains(cinema.name)){
+                                Button(cinema.name) {
+                                    selectedCinema = cinema
+                                    isOrdering = true
+                                }
                             }
                         }
                     }
-                    Text("Other Cinemas: ")
-                            .fontWeight(.bold)
-                    ForEach(viewModel.getCinemas()) { cinema in
-                        if(!userAccount.selectedCinemas.contains(cinema.name)){
-                            Button(cinema.name) {
-                                selectedCinema = cinema
-                                isOrdering = true
+                    
+                    Section(header: Text("Other Cinemas")){
+                        ForEach(viewModel.getCinemas()) { cinema in
+                            if(!userAccount.selectedCinemas.contains(cinema.name)){
+                                Button(cinema.name) {
+                                    selectedCinema = cinema
+                                    isOrdering = true
+                                }
                             }
                         }
                     }

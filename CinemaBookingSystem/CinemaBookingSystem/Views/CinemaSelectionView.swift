@@ -15,24 +15,26 @@ struct CinemaSelectionView: View {
     
     var body: some View {
         List {
-            Text("Favorite Cinemas: ")
-                .fontWeight(.bold)
-            ForEach(viewModel.getCinemas()) { cinema in
-                if userAccount.selectedCinemas.contains(cinema.name){
-                    NavigationLink(cinema.name){
-                        SessionsView(cinema: cinema, movie: movie, userAccount: $userAccount, isOrdering: $isOrdering)
+            //show favorites first
+            Section(header: Text("Favorite Cinemas")){
+                ForEach(viewModel.getCinemas()) { cinema in
+                    if userAccount.selectedCinemas.contains(cinema.name){
+                        NavigationLink(cinema.name){
+                            SessionsView(cinema: cinema, movie: movie, userAccount: $userAccount, isOrdering: $isOrdering)
+                        }
                     }
                 }
             }
-            Text("Other Cinemas: ")
-                .fontWeight(.bold)
-            ForEach(viewModel.getCinemas()) { cinema in
-                if !userAccount.selectedCinemas.contains(cinema.name){
-                    NavigationLink(cinema.name){
-                        SessionsView(cinema: cinema, movie: movie, userAccount: $userAccount, isOrdering: $isOrdering)
+            Section(header: Text("Other Cinemas")){
+                ForEach(viewModel.getCinemas()) { cinema in
+                    if !userAccount.selectedCinemas.contains(cinema.name){
+                        NavigationLink(cinema.name){
+                            SessionsView(cinema: cinema, movie: movie, userAccount: $userAccount, isOrdering: $isOrdering)
+                        }
                     }
                 }
             }
+            
         }.navigationTitle("Select Cinema")
     }
 }
