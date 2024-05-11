@@ -10,6 +10,7 @@ import SwiftUI
 struct GiftCardsView: View {
     @Binding var userAccount: User
 
+
     var body: some View {
         if userAccount.giftCards.isEmpty {
             // Display a message when there are no gift cards
@@ -17,6 +18,11 @@ struct GiftCardsView: View {
                 .font(.title)
                 .padding()
                 .multilineTextAlignment(.center)
+            
+            NavigationLink(destination: BuyGiftCardView(userAccount: $userAccount)) {
+                Text("Get a New Gift Card")
+            }
+            
         } else {
             // List the gift cards when there are some
             NavigationView {
@@ -27,7 +33,12 @@ struct GiftCardsView: View {
                         Text("Gift Card Code: \(giftCard.id.uuidString)")
                     }
                     .padding(.vertical, 8)
+                    NavigationLink(destination: BuyGiftCardView(userAccount: $userAccount)) {
+                        Text("Get a New Gift Card")
+                    }
                 }
+                }
+                
                 .navigationTitle("My Gift Cards")
             }
         }
@@ -38,7 +49,7 @@ struct GiftCardsView: View {
         formatter.dateStyle = .medium
         return formatter
     }
-}
+
 
 //
 //#Preview {

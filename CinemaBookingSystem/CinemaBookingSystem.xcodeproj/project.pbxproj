@@ -33,6 +33,7 @@
 		65C7412C2BE1319A004C92B1 /* CinemasViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7412B2BE1319A004C92B1 /* CinemasViewModel.swift */; };
 		65C7412E2BE1323E004C92B1 /* MoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7412D2BE1323E004C92B1 /* MoviesViewModel.swift */; };
 		959116E22BE75C62007DA1F2 /* GiftCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959116E12BE75C62007DA1F2 /* GiftCardModel.swift */; };
+		95E3CF172BEF7FEA00DC5461 /* BuyGiftCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3CF162BEF7FEA00DC5461 /* BuyGiftCardView.swift */; };
 		B52476292BDF679C0045B89F /* CinemaBookingSystemApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52476282BDF679C0045B89F /* CinemaBookingSystemApp.swift */; };
 		B524762B2BDF679C0045B89F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B524762A2BDF679C0045B89F /* ContentView.swift */; };
 		B524762D2BDF679E0045B89F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B524762C2BDF679E0045B89F /* Assets.xcassets */; };
@@ -73,6 +74,7 @@
 		65C7412B2BE1319A004C92B1 /* CinemasViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemasViewModel.swift; sourceTree = "<group>"; };
 		65C7412D2BE1323E004C92B1 /* MoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewModel.swift; sourceTree = "<group>"; };
 		959116E12BE75C62007DA1F2 /* GiftCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftCardModel.swift; sourceTree = "<group>"; };
+		95E3CF162BEF7FEA00DC5461 /* BuyGiftCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyGiftCardView.swift; sourceTree = "<group>"; };
 		B52476252BDF679C0045B89F /* CinemaBookingSystem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CinemaBookingSystem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52476282BDF679C0045B89F /* CinemaBookingSystemApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaBookingSystemApp.swift; sourceTree = "<group>"; };
 		B524762A2BDF679C0045B89F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				65BE0F792BEE1A2000BCAB5B /* GiftCardsView.swift */,
 				65C741172BE10E12004C92B1 /* RegistrationView.swift */,
 				65C7411D2BE11D39004C92B1 /* AccountView.swift */,
+				95E3CF162BEF7FEA00DC5461 /* BuyGiftCardView.swift */,
 				65C7411F2BE11E09004C92B1 /* SettingsView.swift */,
 				B52476382BE706B20045B89F /* MovieView.swift */,
 				B524763C2BE73A5C0045B89F /* MoviesView.swift */,
@@ -274,6 +277,7 @@
 				6502C3442BEB926000172CCE /* SessionsView.swift in Sources */,
 				65C7412A2BE12AEC004C92B1 /* MovieModel.swift in Sources */,
 				65C741202BE11E09004C92B1 /* SettingsView.swift in Sources */,
+				95E3CF172BEF7FEA00DC5461 /* BuyGiftCardView.swift in Sources */,
 				B524763B2BE709380045B89F /* CinemasView.swift in Sources */,
 				65C741102BE10CFA004C92B1 /* UserAccountView.swift in Sources */,
 				959116E22BE75C62007DA1F2 /* GiftCardModel.swift in Sources */,
