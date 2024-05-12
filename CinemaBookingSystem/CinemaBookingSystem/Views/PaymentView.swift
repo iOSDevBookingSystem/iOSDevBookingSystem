@@ -250,7 +250,7 @@ struct PaymentView: View {
     
     private func isFormValid() -> Bool {
         // If there is any charge not covered by gift cards, will require form to be filled
-        if cardPaymentRequired {
+        if self.cardPaymentRequired {
             // If there is a card payment required, simply asset all fields a full, and no errormessage
             return errorMessage == nil && !name.isEmpty && !cardNumber.isEmpty && !expiryDate.isEmpty && !cvv.isEmpty
         } else {
@@ -264,9 +264,7 @@ struct PaymentView: View {
             sum + (userAccount.giftCards.first(where: { $0.id == id })?.balance ?? 0)
         }
 
-        cardPaymentRequired = total > totalGiftCardBalance
-        self.paymentBreakdown["GiftCard"]! += Double(totalGiftCardBalance)
-        self.paymentBreakdown["Card"]! += Double(total - totalGiftCardBalance)
+        self.cardPaymentRequired = total > totalGiftCardBalance
     }
 
     private func calcPaymentBreakdown() -> [String] {
@@ -291,8 +289,8 @@ struct PaymentView: View {
         return details
     }
 
-    //TODO: move this to viewmodel
     private func completePayment() {
+        let total = orderViewModel.totalOrderAmount
         var remainingAmount = orderViewModel.totalOrderAmount
 
         // First, attempt to use the gift cards
@@ -305,8 +303,12 @@ struct PaymentView: View {
             }
         }
         
+        self.paymentBreakdown["GiftCard"]! = Double(total - remainingAmount)
+        self.paymentBreakdown["Card"]! = Double(remainingAmount)
+        
         // Save the order to the user's account
         print("Order Completed")
+        print(self.paymentBreakdown)
         userAccount.orders.append(Order(items: orderViewModel.generateAddOns(), tickets: orderViewModel.generateTickets(), cinema: orderViewModel.cinema, session: orderViewModel.session, paymentBreakdown: self.paymentBreakdown))
         
         // Show cover

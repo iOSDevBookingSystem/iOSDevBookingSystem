@@ -26,6 +26,9 @@ struct GiftCardsView: View {
         } else {
             // List the gift cards when there are some
             NavigationView {
+                NavigationLink(destination: BuyGiftCardView(userAccount: $userAccount)) {
+                    Text("Get a New Gift Card")
+                }
                 List(userAccount.giftCards, id: \.id) { giftCard in
                     VStack(alignment: .leading) {
                         Text("Balance: $\(giftCard.balance, specifier: "%.2f")")
@@ -33,16 +36,12 @@ struct GiftCardsView: View {
                         Text("Gift Card Code: \(giftCard.id.uuidString)")
                     }
                     .padding(.vertical, 8)
-                    NavigationLink(destination: BuyGiftCardView(userAccount: $userAccount)) {
-                        Text("Get a New Gift Card")
-                    }
                 }
-                }
-                
-                .navigationTitle("My Gift Cards")
             }
+            .navigationTitle("My Gift Cards")
         }
     }
+}
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()

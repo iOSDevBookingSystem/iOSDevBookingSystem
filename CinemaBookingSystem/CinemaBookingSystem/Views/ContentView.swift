@@ -52,7 +52,7 @@ struct ContentView: View {
         let giftCard = GiftCard(amount: 40.00)
         
         // Create users
-        var peterParker = User(name: "Peter Parker", email: "peter@spiderman.com", password: "spiderman", phoneNumber: "02 1234 5678", gender: "Male", selectedGenres: Set(["Comedy"]), selectedCinemas:Set(["Sydney City"]))
+        let peterParker = User(name: "Peter Parker", email: "peter@spiderman.com", password: "spiderman", phoneNumber: "02 1234 5678", gender: "Male", selectedGenres: Set(["Comedy"]), selectedCinemas:Set(["Sydney City"]))
         var testingUser = User(name: "Testing User", email: "t", password: "t", phoneNumber: "02 1234 5678", gender: "Male", selectedGenres: Set(["Comedy"]), selectedCinemas:Set(["Blacktown"]))
 
         testingUser.addGiftCard(giftCard)
@@ -61,7 +61,7 @@ struct ContentView: View {
         
         // Add cinemas
         let sydneyCinema = Cinema(id: 1, name: "Sydney City", address: "George St", rooms: [Room(id: 1, layout: Layout(leftSeats: 2, middleSeats: 5, rightSeats: 2, rowCount: 10))])
-        let blacktownCinema = Cinema(id: 2, name: "Blacktown", address: "Main St", rooms: [Room(id: 1, layout: Layout(leftSeats: 2, middleSeats: 5, rightSeats: 2, rowCount: 10))])
+        let blacktownCinema = Cinema(id: 2, name: "Blacktown", address: "Main St", rooms: [Room(id: 1, layout: Layout(leftSeats: 2, middleSeats: 4, rightSeats: 2, rowCount: 5))])
         self.cinemasViewModel.addCinema(cinema: sydneyCinema)
         self.cinemasViewModel.addCinema(cinema: blacktownCinema)
         

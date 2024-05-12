@@ -17,7 +17,6 @@
 		65BE0F782BEE01F500BCAB5B /* TicketSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65BE0F772BEE01F500BCAB5B /* TicketSelectionView.swift */; };
 		65BE0F7A2BEE1A2000BCAB5B /* GiftCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65BE0F792BEE1A2000BCAB5B /* GiftCardsView.swift */; };
 		65BE0F7C2BEE2FC900BCAB5B /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65BE0F7B2BEE2FC900BCAB5B /* OrderView.swift */; };
-		65BE0F7E2BF02D3F00BCAB5B /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65BE0F7D2BF02D3F00BCAB5B /* PaymentViewModel.swift */; };
 		65C7410A2BE10C74004C92B1 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C741092BE10C74004C92B1 /* AuthViewModel.swift */; };
 		65C7410C2BE10CA6004C92B1 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7410B2BE10CA6004C92B1 /* AuthView.swift */; };
 		65C741102BE10CFA004C92B1 /* UserAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7410F2BE10CFA004C92B1 /* UserAccountView.swift */; };
@@ -59,7 +58,6 @@
 		65BE0F772BEE01F500BCAB5B /* TicketSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketSelectionView.swift; sourceTree = "<group>"; };
 		65BE0F792BEE1A2000BCAB5B /* GiftCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftCardsView.swift; sourceTree = "<group>"; };
 		65BE0F7B2BEE2FC900BCAB5B /* OrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderView.swift; sourceTree = "<group>"; };
-		65BE0F7D2BF02D3F00BCAB5B /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		65C741092BE10C74004C92B1 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		65C7410B2BE10CA6004C92B1 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		65C7410F2BE10CFA004C92B1 /* UserAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountView.swift; sourceTree = "<group>"; };
@@ -110,7 +108,6 @@
 				65C7412B2BE1319A004C92B1 /* CinemasViewModel.swift */,
 				65C7412D2BE1323E004C92B1 /* MoviesViewModel.swift */,
 				6502C34B2BEBAC5E00172CCE /* OrderViewModel.swift */,
-				65BE0F7D2BF02D3F00BCAB5B /* PaymentViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -289,7 +286,6 @@
 				65C741222BE12169004C92B1 /* SeatSelectionViewModel.swift in Sources */,
 				B524763F2BE78D890045B89F /* AddOnsView.swift in Sources */,
 				65BE0F7C2BEE2FC900BCAB5B /* OrderView.swift in Sources */,
-				65BE0F7E2BF02D3F00BCAB5B /* PaymentViewModel.swift in Sources */,
 				6523F17C2BE2486900538065 /* OrderModel.swift in Sources */,
 				65C7412C2BE1319A004C92B1 /* CinemasViewModel.swift in Sources */,
 				65BE0F782BEE01F500BCAB5B /* TicketSelectionView.swift in Sources */,

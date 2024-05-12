@@ -50,6 +50,9 @@ class OrderViewModel: ObservableObject {
                     let ticketName = "\(session.movie.name) - \(cinema.name) - \(session.time) - Seat: \(selectedSeat)"
                     let ticket = Ticket(name: ticketName, unit_price: type.price, type: type, session: session)
                     generated.append(ticket)
+                    
+                    // Mark seats as taken
+                    self.cinema.appendTakenSeat(to: session.allocatedRoom, seatId: selectedSeat)
                 }
             }
         }

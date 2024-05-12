@@ -34,8 +34,14 @@ class SeatSelectionViewModel: ObservableObject {
         // Generate the seats display
         generateSeats()
         
-        // Set seats as taken
-        setSeatTaken("A1")
+        // Get taken seats
+        if let takenSeats = cinema.getTakenSeats(for: session.allocatedRoom) {
+            // Fill in the taken seats
+            for seat in takenSeats {
+                setSeatTaken(seat)
+            }
+        }
+        
     }
 
 

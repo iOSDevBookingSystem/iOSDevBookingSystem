@@ -15,12 +15,7 @@ struct Cinema: Codable, Hashable, Identifiable {
     var sessions: [Session] = []
     
     func getRoomLayout(roomId: Int) -> Layout? {
-        for room in self.rooms {
-            if room.id == roomId {
-                return room.layout
-            }
-        }
-        return nil
+        return rooms.first { $0.id == roomId }?.layout
     }
     
     mutating func addSession(movie: Movie, time: String) {
@@ -54,11 +49,26 @@ struct Cinema: Codable, Hashable, Identifiable {
     func getSessions(for movie: Movie) -> [Session] {
         return sessions.filter { $0.movie.id == movie.id }
     }
+    
+    func getTakenSeats(for roomId: Int) -> [String]? {
+        print(rooms.first { $0.id == roomId }?.takenSeats)
+        return rooms.first { $0.id == roomId }?.takenSeats
+    }
+    
+    mutating func appendTakenSeat(to roomId: Int, seatId: String) {
+        if let index = rooms.firstIndex(where: { $0.id == roomId }) {
+            rooms[index].takenSeats.append(seatId)
+            print("Appended seat to cinema")
+        } else {
+            print("room not found")
+        }
+    }
 }
 
 struct Room: Codable, Hashable {
     var id: Int
     var layout: Layout
+    var takenSeats: [String] = []
 }
 
 struct Layout: Codable, Hashable {
