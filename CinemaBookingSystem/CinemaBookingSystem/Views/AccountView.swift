@@ -11,6 +11,7 @@ import SwiftUI
 struct AccountView: View {
     @Binding var userAccount: User
     @Binding var isLoggedIn: Bool
+    @ObservedObject var viewModel : AuthViewModel
 
     var body: some View {
         NavigationView {
@@ -32,14 +33,25 @@ struct AccountView: View {
                         Text("App Settings")
                     }
 
-                    Button("Logout") {
-                        isLoggedIn = false
-                    }
                 }
+                    .navigationTitle("My Account")
+                    .listStyle(GroupedListStyle())
+                    
                 
+                NavigationLink{
+                    ContentView()
+                        .onAppear{
+                            viewModel.logout()
+                        }
+                } label: {
+                    Text("Logout")
+                        .tint(.red)
+                }
+                Spacer()
             }
-            .navigationTitle("My Account")
-            .listStyle(GroupedListStyle())
+            
+            
+            
         }
     }
 }

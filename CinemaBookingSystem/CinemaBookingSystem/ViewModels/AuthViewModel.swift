@@ -37,7 +37,7 @@ class AuthViewModel: ObservableObject {
     func logout() {
         // TODO: These are not working
         isAuthenticated = false
-        userAccount = nil
+        //userAccount = nil
         email = ""
         password = ""
         print("Logging out: email = \(email), password = \(password)")
