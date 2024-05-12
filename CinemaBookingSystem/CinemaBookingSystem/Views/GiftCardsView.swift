@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import Combine
 
 struct GiftCardsView: View {
     @Binding var userAccount: User
+    @State private var shouldRefresh: Bool = false // Add shouldRefresh state
 
     var body: some View {
         NavigationView {
@@ -32,16 +34,25 @@ struct GiftCardsView: View {
             }
         }
         .navigationBarItems(trailing:
-            NavigationLink(destination: BuyGiftCardView(userAccount: $userAccount)) {
+            NavigationLink(destination: BuyGiftCardView(userAccount: $userAccount, shouldRefresh: $shouldRefresh)) {
                 Text("Get a New Gift Card")
             }
         )
+        .onReceive(Just(shouldRefresh)) { refreshed in
+                    if refreshed {
+                        // Refresh the user account data or any other necessary actions
+                        // For example, you may fetch updated user data from a server
+                        // Here, we simply reset shouldRefresh to false
+                        self.shouldRefresh = false
+                    }
+                }
     }
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         return formatter
+        
     }
 }
 //

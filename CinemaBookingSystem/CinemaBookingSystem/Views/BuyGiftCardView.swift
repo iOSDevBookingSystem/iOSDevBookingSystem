@@ -9,6 +9,8 @@ import SwiftUI
 
 struct BuyGiftCardView: View {
     @Binding var userAccount: User
+    @Binding var shouldRefresh: Bool // Binding to refresh the previous view
+    @Environment(\.presentationMode) var presentationMode
     @State private var name: String = ""
     @State private var address: String = ""
     @State private var cardNumber: String = ""
@@ -86,6 +88,10 @@ struct BuyGiftCardView: View {
         
         alertMessage = "Successfully purchased a gift card worth $\(amountValue)"
                 showAlert = true
+        
+        // Dismiss the current view after completing payment
+        shouldRefresh = true // Set shouldRefresh to true to trigger refresh in the previous view
+        presentationMode.wrappedValue.dismiss()
     }
     
 
