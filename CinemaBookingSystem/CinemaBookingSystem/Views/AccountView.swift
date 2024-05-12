@@ -11,7 +11,7 @@ import SwiftUI
 struct AccountView: View {
     @Binding var userAccount: User
     @Binding var isLoggedIn: Bool
-    @ObservedObject var viewModel : AuthViewModel
+    @ObservedObject var authViewModel : AuthViewModel
 
     var body: some View {
         NavigationView {
@@ -41,7 +41,7 @@ struct AccountView: View {
                 NavigationLink{
                     ContentView()
                         .onAppear{
-                            viewModel.logout()
+                            authViewModel.logout()
                         }
                 } label: {
                     Text("Logout")

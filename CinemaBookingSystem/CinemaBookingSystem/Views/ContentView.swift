@@ -27,7 +27,7 @@ struct ContentView: View {
                                 Label("Cinemas", systemImage: "tv.fill")
                             }
                         
-                        AccountView(userAccount: user, isLoggedIn: $authViewModel.isAuthenticated, viewModel: authViewModel)
+                        AccountView(userAccount: user, isLoggedIn: $authViewModel.isAuthenticated, authViewModel: authViewModel)
                             .tabItem {
                                 Label("My Account", systemImage: "person.fill")
                             }
