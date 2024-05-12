@@ -13,9 +13,9 @@ class AuthViewModel: ObservableObject {
     @Published var isAuthenticated: Bool = false
     @Published var loginError: String = ""
     @Published var isLoggingIn: Bool = false
+    @Published var userAccount: User?
     
     private var userAccounts: [User] = []
-    var userAccount: User?
     
     func login(completion: () -> Void, onFailure: () -> Void) {
         self.isLoggingIn = true
