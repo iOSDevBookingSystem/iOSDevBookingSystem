@@ -35,6 +35,13 @@ struct OrderView: View {
         } else {
             Text("No add-ons in this order")
         }
+        
+        Text("Payment Breakdown")
+            .font(.headline)
+        
+        ForEach(order.paymentBreakdownArray, id: \.key) { payment in
+            Text("\(payment.key): \(String(format: "%.2f", payment.value))")
+        }
     }
 }
 

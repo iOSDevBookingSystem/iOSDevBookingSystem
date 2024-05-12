@@ -19,13 +19,30 @@ struct MoviesView: View {
         VStack{
             NavigationView{
                 ScrollView{
+                    //show movies in favorite genre
+                    Text("Movies For You: ")
+                        .font(.title2)
                     ForEach(viewModel.getMovies()){ movie in
-                        Button(action: {
-                            selectedMovie = movie
-                            isOrdering = true
-                        }, label: {
-                            MovieView(movie: movie)
-                        })
+                        if(userAccount.selectedGenres.contains(movie.genre)){
+                            Button(action: {
+                                selectedMovie = movie
+                                isOrdering = true
+                            }, label: {
+                                MovieView(movie: movie)
+                            })
+                        }
+                    }
+                    Text("Other Movies: ")
+                        .font(.title2)
+                    ForEach(viewModel.getMovies()){ movie in
+                        if(!userAccount.selectedGenres.contains(movie.genre)){
+                            Button(action: {
+                                selectedMovie = movie
+                                isOrdering = true
+                            }, label: {
+                                MovieView(movie: movie)
+                            })
+                        }
                     }
                 }
                 .navigationTitle("Movies Showing")

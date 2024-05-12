@@ -16,16 +16,21 @@ struct MovieView: View {
                 .frame(width: 100, height: 150)
         
             VStack {
-                Text(movie.name)
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                    .foregroundColor(.black)
-                    .multilineTextAlignment(.leading)
-                
-                Text(movie.description)
-                    .font(.subheadline)
-                    .fontWeight(.thin)
-                    .foregroundColor(.black)
-                    .multilineTextAlignment(.leading)
+                HStack{
+                    Text(movie.name)
+                        .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(.black)
+                        .multilineTextAlignment(.leading)
+                    Spacer()
+                }
+                HStack{
+                    Text(movie.description)
+                        .font(.subheadline)
+                        .fontWeight(.thin)
+                        .foregroundColor(.black)
+                        .multilineTextAlignment(.leading)
+                    Spacer()
+                }
             }
             
             Spacer()

@@ -24,7 +24,7 @@ struct AddOnsView: View {
                 }
             }
             Spacer()
-            NavigationLink("Add To Order", destination: PaymentView(orderViewModel: orderViewModel, userAccount: $userAccount, isOrdering: $isOrdering))
+            NavigationLink("Continue", destination: PaymentView(orderViewModel: orderViewModel, userAccount: $userAccount, isOrdering: $isOrdering))
                 .padding()
                 .frame(maxWidth: .infinity)
                 .background(Color.blue)

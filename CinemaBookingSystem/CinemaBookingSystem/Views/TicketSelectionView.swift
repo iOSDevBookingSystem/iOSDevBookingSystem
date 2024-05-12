@@ -30,13 +30,18 @@ struct TicketSelectionView: View {
             NavigationLink("Continue", destination: SeatSelectionView(viewModel: SeatSelectionViewModel(cinema: cinema, session: session, tickets: tickets), userAccount: $userAccount, isOrdering: $isOrdering))
                 .padding()
                 .frame(maxWidth: .infinity)
-                .background(Color.blue)
+                .background(!noSelectedTickets ? Color.blue : Color.gray)
                 .foregroundColor(.white)
                 .cornerRadius(10)
+                .disabled(noSelectedTickets)
                 .padding()
         }
         .navigationTitle("Ticket Selection")
         .padding(.top)
+    }
+    
+    var noSelectedTickets: Bool {
+        return tickets.allSatisfy { $0.value == 0 }
     }
 
 }

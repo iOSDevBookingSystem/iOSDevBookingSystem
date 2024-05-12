@@ -12,13 +12,16 @@ struct PaymentView: View {
     @Binding var userAccount: User
     @Binding var isOrdering: Bool
     @State private var name: String = ""
-    @State private var address: String = ""
     @State private var cardNumber: String = ""
-    @State private var expiryDate: Date = Date()
+    @State private var expiryDate: String = ""
     @State private var cvv: String = ""
     @State private var selectedGiftCard: UUID?
     @State private var promoCode: String = ""
     @State private var orderFinished: Bool = false
+    @State private var errorMessage: String?
+    
+    @State private var cardPaymentRequired: Bool = true
+    @State private var paymentBreakdown: [String: Double] = ["GiftCard": 0, "Card": 0]
     
     // Define the range of dates available for the expiry date
     let calendar = Calendar.current
@@ -77,6 +80,7 @@ struct PaymentView: View {
                         }
                         .onTapGesture {
                             toggleGiftCardSelection(giftCard.id)
+                            updateCardPaymentRequirement()
                         }
                         .disabled(giftCard.expirationDate < Date())
                     }
@@ -90,7 +94,7 @@ struct PaymentView: View {
                 // Show Payment information breakdown
                 Section(header: Text("Payment Details")) {
                     VStack(alignment: .leading) {
-                        ForEach(paymentBreakdown(), id: \.self) { detail in
+                        ForEach(calcPaymentBreakdown(), id: \.self) { detail in
                             Text(detail)
                         }
                     }
@@ -98,18 +102,33 @@ struct PaymentView: View {
                 
                 // Only show Billing Information if the total balance of selected gift cards doesn't cover the order total
                 if totalGiftCardBalance < orderViewModel.totalOrderAmount {
-                    // TODO: add validation to all these including error message
                     Section(header: Text("Billing Information")) {
                         TextField("Name", text: $name)
-                        TextField("Billing Address", text: $address)
+                            .onChange(of: name) {
+                                validateName()
+                            }
                         TextField("Card Number", text: $cardNumber)
                             .keyboardType(.numberPad)
-                        // TODO: not correct format
-                        DatePicker("Expiry Date (MM/YY)", selection: $expiryDate, in: expiryDateRange, displayedComponents: .date)
-                            .datePickerStyle(.compact)
+                            .onChange(of: cardNumber) {
+                                validateCardNumber()
+                            }
+                        TextField("Expiry Date (MM/YY)", text: $expiryDate)
+                            .keyboardType(.numberPad)
+                            .onChange(of: expiryDate) {
+                                validateExpiry()
+                            }
                         TextField("CVV", text: $cvv)
                             .keyboardType(.numberPad)
+                            .onChange(of: cvv) {
+                                validateCVV()
+                            }
+
                     }
+                }
+                
+                // Show error message if any
+                if let errorMessage = errorMessage {
+                    Text(errorMessage).foregroundColor(.red).padding()
                 }
 
                 Button("Pay") {
@@ -117,11 +136,11 @@ struct PaymentView: View {
                 }
                 .padding()
                 .frame(maxWidth: .infinity)
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(10)
                 .background(isFormValid() ? Color.blue : Color.gray)
                 .disabled(!isFormValid())
+                .foregroundColor(.white)
+                .cornerRadius(10)
+//                .padding()
             }
             .navigationBarTitle("Complete Your Payment", displayMode: .inline)
         }
@@ -149,25 +168,108 @@ struct PaymentView: View {
         })
     }
 
-    private func isFormValid() -> Bool {
-        if totalGiftCardBalance >= orderViewModel.totalOrderAmount {
-            return true
+    private func validateName() {
+        if name.isEmpty {
+            errorMessage = "Name cannot be empty"
+        } else {
+            errorMessage = nil
+        }
+    }
+    
+    private func validateCardNumber() {
+        if cardNumber.count == 16 && Int(cardNumber) != nil {
+            errorMessage = nil
+        } else {
+            errorMessage = "Card number is invalid"
+        }
+    }
+    
+    private func validateExpiry() {
+        // Only allow numbers and slashes
+        var filtered = expiryDate.filter { "0123456789/".contains($0) }
+
+        // Handle the case where a user might try to delete the slash
+        if filtered.count == 3 && filtered.last == "/" && !expiryDate.hasSuffix("/") {
+            // If the user is trying to delete the slash, allow it by removing the slash
+            filtered = String(filtered.prefix(2))
+        } else if filtered.count == 2 && !filtered.contains("/") && expiryDate.hasSuffix("/") {
+            // Automatically add slash after 2 digits if not already present
+            filtered += "/"
+        }
+
+        // Limit length to 5 characters to fit MM/YY
+        if filtered.count > 5 {
+            filtered = String(filtered.prefix(5))
+        }
+
+        // Validate month part to be within 01 to 12 range
+        let components = filtered.split(separator: "/")
+        if components.count == 2 {
+            let monthStr = String(components[0])
+            if let month = Int(monthStr), !(1...12).contains(month) {
+                // Reset to a valid month if possible, otherwise clear
+                filtered = String(month > 12 ? "12/" : filtered.dropLast())
+            }
+        }
+
+        // Update the expiryDate only if it's different from filtered to avoid recursion
+        if filtered != expiryDate {
+            expiryDate = filtered
         }
         
-        let isNameValid = !name.isEmpty
-        let isAddressValid = !address.isEmpty
-        let isCardNumberValid = cardNumber.count == 16 && Int(cardNumber) != nil
+        if !isExpiryDateInFuture(expiryDate) {
+            errorMessage = "Expiry date is invalid"
+        } else {
+            errorMessage = nil
+        }
+    }
+    
+    private func validateCVV() {
+        if cvv.count == 3 && Int(cvv) != nil {
+            errorMessage = nil
+        } else {
+            errorMessage = "CVV is invalid"
+        }
+    }
+    
+    private func isExpiryDateInFuture(_ expiryDateStr: String) -> Bool {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/yy"
 
-        // Ensure the expiry date is in the future
-        let today = Date()
-        let isExpiryDateValid = Calendar.current.compare(today, to: expiryDate, toGranularity: .day) == .orderedAscending
+        if let expiryDate = dateFormatter.date(from: expiryDateStr) {
+            let currentDate = Date()
+            let currentMonth = Calendar.current.component(.month, from: currentDate)
+            let currentYear = Calendar.current.component(.year, from: currentDate) % 100 // last two digits
+            let expiryMonth = Calendar.current.component(.month, from: expiryDate)
+            let expiryYear = Calendar.current.component(.year, from: expiryDate) % 100 // last two digits
 
-        let isCVVValid = cvv.count == 3 && Int(cvv) != nil
-
-        return isNameValid && isAddressValid && isCardNumberValid && isExpiryDateValid && isCVVValid
+            return (expiryYear > currentYear) || (expiryYear == currentYear && expiryMonth >= currentMonth)
+        }
+        return false
+    }
+    
+    private func isFormValid() -> Bool {
+        // If there is any charge not covered by gift cards, will require form to be filled
+        if cardPaymentRequired {
+            // If there is a card payment required, simply asset all fields a full, and no errormessage
+            return errorMessage == nil && !name.isEmpty && !cardNumber.isEmpty && !expiryDate.isEmpty && !cvv.isEmpty
+        } else {
+            return errorMessage == nil
+        }
     }
 
-    private func paymentBreakdown() -> [String] {
+    private func updateCardPaymentRequirement() {
+        let total = orderViewModel.totalOrderAmount
+        let totalGiftCardBalance = orderViewModel.selectedGiftCards.reduce(0) { sum, id in
+            sum + (userAccount.giftCards.first(where: { $0.id == id })?.balance ?? 0)
+        }
+
+        cardPaymentRequired = total > totalGiftCardBalance
+        self.paymentBreakdown["GiftCard"]! += Double(totalGiftCardBalance)
+        self.paymentBreakdown["Card"]! += Double(total - totalGiftCardBalance)
+    }
+
+    private func calcPaymentBreakdown() -> [String] {
         var details: [String] = []
         let total = orderViewModel.totalOrderAmount
         var remainingAmount = total
@@ -189,6 +291,7 @@ struct PaymentView: View {
         return details
     }
 
+    //TODO: move this to viewmodel
     private func completePayment() {
         var remainingAmount = orderViewModel.totalOrderAmount
 
@@ -201,13 +304,10 @@ struct PaymentView: View {
                 remainingAmount -= spendAmount
             }
         }
-
-        // Assume the credit card is charged if there's any remaining amount
-        // No actual credit card processing is handled here, as you requested
         
         // Save the order to the user's account
         print("Order Completed")
-        userAccount.orders.append(Order(payment_method: "Card", items: orderViewModel.generateAddOns(), tickets: orderViewModel.generateTickets(), cinema: orderViewModel.cinema, session: orderViewModel.session))
+        userAccount.orders.append(Order(items: orderViewModel.generateAddOns(), tickets: orderViewModel.generateTickets(), cinema: orderViewModel.cinema, session: orderViewModel.session, paymentBreakdown: self.paymentBreakdown))
         
         // Show cover
         orderFinished = true

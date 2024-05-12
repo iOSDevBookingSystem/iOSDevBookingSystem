@@ -9,6 +9,7 @@ import SwiftUI
 
 struct OrderHistoryView: View {
     @Binding var userAccount: User
+    
 
     var body: some View {
         if userAccount.orders.isEmpty {
@@ -34,6 +35,14 @@ struct OrderHistoryView: View {
                             Text("Session: \(order.session.time)")
                                 .font(.subheadline)
                                 .padding()
+                            
+                            // TODO: cancel order
+                            // Add an action button which pops up with options
+                            // one of the options is cancel order
+                            // then when they click that ask are you sure
+                            // then go over thepayment methods and refund inform the user,
+                            // xx is going back to card, xx will be issued as new gift cards
+                            // then remove order from order list
                         }
                     }
                 }

@@ -24,7 +24,7 @@ struct MovieDetailsView: View {
                 Text(movie.name)
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                     .foregroundColor(.black)
-                Text(movie.description)
+                Text(movie.genre)
                     .font(.body)
                     .fontWeight(.thin)
                     .foregroundColor(.black)
@@ -38,7 +38,7 @@ struct MovieDetailsView: View {
             //navigate to cinemas to purchase tickets
             
             NavigationLink{
-                //CinemasView(viewModel: cinemasViewModel, moviesViewModel: moviesViewModel, userAccount: $userAccount)
+                // proceed to select cinema
                 CinemaSelectionView(viewModel: cinemasViewModel, userAccount: $userAccount, isOrdering: $isOrdering, movie: movie)
             } label:{
                 ZStack{

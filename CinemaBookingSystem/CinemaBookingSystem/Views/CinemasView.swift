@@ -19,14 +19,29 @@ struct CinemasView: View {
         VStack {
             NavigationView {
                 List {
-                    ForEach(viewModel.getCinemas()) { cinema in
-                        Button(cinema.name) {
-                            selectedCinema = cinema
-                            isOrdering = true
+                    //show favorites
+                    Section(header: Text("Favorite Cinemas")){
+                        ForEach(viewModel.getCinemas()) { cinema in
+                            if(userAccount.selectedCinemas.contains(cinema.name)){
+                                Button(cinema.name) {
+                                    selectedCinema = cinema
+                                    isOrdering = true
+                                }
+                            }
                         }
                     }
-                }
-                .navigationTitle("Cinemas")
+                    
+                    Section(header: Text("Other Cinemas")){
+                        ForEach(viewModel.getCinemas()) { cinema in
+                            if(!userAccount.selectedCinemas.contains(cinema.name)){
+                                Button(cinema.name) {
+                                    selectedCinema = cinema
+                                    isOrdering = true
+                                }
+                            }
+                        }
+                    }
+                } .navigationTitle("Cinemas")
             }
             .fullScreenCover(isPresented: $isOrdering, onDismiss: {
                 // Reset the state when the full screen cover is dismissed

@@ -10,8 +10,8 @@ import SwiftUI
 struct UserAccountView: View {
     @Binding var userAccount: User
     
-    private var genres = GenreList.allGenres()
-    private var cinemas = CinemaList.allCinemas()
+    @State var genres = GenreList.allGenres()
+    @State var cinemas = CinemaList.allCinemas()
     
     init(userAccount: Binding<User>) {
         self._userAccount = userAccount
